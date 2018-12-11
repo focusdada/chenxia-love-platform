@@ -1,0 +1,56 @@
+﻿@model PatientSearchInput
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-users font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">用户列表</span>
+                </div>
+                <div class="actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <button type="button" class="btn btn-circle btn-primary" data-toggle="modal" onclick="Edit()">Add Patient</button>
+                    </div>
+                </div>
+                <form class="form-horizontal" role="form" asp-controller="Patient" asp-action="List" method="get" id="searchform">
+                    <input asp-for="PageIndex" hidden />
+                </form>
+            </div>
+            <div class="portlet-body" id="datagrid">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<div class="modal fade" id="promptmodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<div class="modal fade" id="errormodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<script>
+    $(function () {
+        $("#patientnav").addClass("start active open");
+        Search();
+    })
+
+    function Search() {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("List", "Patient")",
+            data: $("#searchform").serialize(),
+            success: function (data) {
+                $("#datagrid").empty();
+                $("#datagrid").html(data);
+            }
+        });
+    }
+
+    function ClickSearch() {
+        window.location = "@Url.Action("Index", "Patient", new { pageIndex = 1 })" + "&hospitalId=" + $("#searchform #HospitalId").val();
+    }
+</script>

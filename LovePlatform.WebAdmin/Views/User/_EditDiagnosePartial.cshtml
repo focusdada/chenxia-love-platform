@@ -1,0 +1,71 @@
+﻿@using LovePlatform.Domain.Models
+@model Diagnose
+@{
+    ViewData["Title"] = "诊疗记录";
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">编辑诊疗记录</h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" role="form" asp-controller="User" asp-action="EditDiagnose" method="post" id="editDiagForm">
+                <input value="@Model.Id" asp-for="Id" hidden />
+                <input asp-for="UserId" hidden />
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="DiseasesType">疾病类型</label>
+                        <div class="col-md-6">
+                            <select class="form-control" asp-for="DiseasesType" asp-items="@ViewBag.DiesasesTypeList"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="Chromosomal">染色体</label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" type="text" asp-for="Chromosomal" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="Immunophenotyping">免疫分型</label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" type="text" asp-for="Immunophenotyping" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="FusionGene">融合基因</label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" type="text" asp-for="FusionGene" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="SecondGenerationGeneSequencing">二代基因测序</label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" type="text" asp-for="SecondGenerationGeneSequencing" rows="6"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn green" onclick="Submit()">保存更改</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Submit() {
+        $.ajax({
+            url: "@Url.Action("EditDiagnose", "User")",
+            type: "POST",
+            data: $("#editDiagForm").serialize(),
+            success: function (data) {
+                $("#editmodal").empty();
+                $("#editmodal").modal("hide");
+                Search();
+            }
+        });
+    }
+</script>

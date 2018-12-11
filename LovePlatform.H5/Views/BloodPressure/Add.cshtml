@@ -1,0 +1,83 @@
+﻿@using LovePlatform.DTO.WebAPI.Input;
+@model AddBloodPressureInput
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>血压</title>
+    <link rel="stylesheet" href="~/css/weui.min.css" />
+    <link rel="stylesheet" href="~/css/f.css" />
+</head>
+<body ontouchstart>
+    <form asp-controller="BloodPressure" asp-action="Add" method="post">
+        <div class="container">
+            <div asp-validation-summary="All" id="summary" class="text-danger" style="text-align:center;color:#FFF;font-size:14px;background-color:#E64340;"></div>
+            <input asp-for="PatientId" hidden />
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label" asp-for="SystolicPressure">收缩压</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" asp-for="SystolicPressure" placeholder="mmhg">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label" asp-for="DiastolicPressure">舒张压</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" asp-for="DiastolicPressure" placeholder="mmhg">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label" asp-for="HeartRate">心率</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="number" asp-for="HeartRate" placeholder="次/分">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-rea fix_btn onlineConsulting_btn">
+            <a class="weui-btn weui-btn_primary" onclick="submit()">确认录入</a>
+        </div>
+    </form>
+    <script src="~/js/zepto.min.js"></script>
+    <script src="~/js/f.js"></script>
+    <script>
+        $(function () {
+            if ($("#SystolicPressure").val() == "0") {
+                $("#SystolicPressure").val('');
+            }
+            if ($("#DiastolicPressure").val() == "0") {
+                $("#DiastolicPressure").val('');
+            }
+            if ($("#HeartRate").val() == "0") {
+                $("#HeartRate").val('');
+            }
+
+            if ($("#summary li").text() == "") {
+                $("#summary").css('padding', null);
+            } else {
+                $("#summary").css('padding', '5px');
+            }
+
+            if ("@ViewBag.IsAdded" == "True") {
+                f.successToptips("录入成功", "@Url.Action("Detail", "ChronicDisease", new { patientId = Model.PatientId })")
+            }
+        })
+
+        function submit() {
+            if (f.reg_txt($("#SystolicPressure").val(), "请输入收缩压") &&
+                f.reg_txt($("#DiastolicPressure").val(), "请输入舒张压") &&
+                f.reg_bloodpressure($("#SystolicPressure").val(),$("#DiastolicPressure").val()) &&
+                f.reg_txt($("#HeartRate").val(), "请输入心率")) {
+                $("form").submit();
+            }
+        }
+    </script>
+</body>
+</html>
+
+

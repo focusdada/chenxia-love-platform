@@ -1,0 +1,151 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-dark bold uppercase">疾病类型</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="echartsDisease" style="height: 600px;"></div>
+            </div>
+        </div>
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-dark bold uppercase">患者性别</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="echarts" style="height: 600px;"></div>
+            </div>
+        </div>
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-dark bold uppercase">用户类型</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="echartsUserType" style="height: 600px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--初始化用-->
+<script src="../assets/global/plugins/echarts/echarts.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        $.get('Analysis/GetUserGender')
+            .success(function (data) {
+                //console.info(data)
+                require.config({ paths: { echarts: "../assets/global/plugins/echarts/" } }), require(["echarts","echarts/chart/pie"], function (e) {
+                    var t = e.init(document.getElementById("echarts"));
+                    t.setOption(
+                        {
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                orient: 'horizontal',
+                                left: '10%',
+                                data: ['男', '女']
+                            },
+                            series: [
+                                {
+                                    type: 'pie',
+                                    radius: '55%',
+                                    center: ['50%', '60%'],
+                                    data: data,
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        })
+                })
+            });
+
+        $.get('Analysis/GetDiseaseType')
+            .success(function (data) {
+                require.config({ paths: { echarts: "../assets/global/plugins/echarts/" } }), require(["echarts", "echarts/chart/pie"], function (e) {
+                    var t = e.init(document.getElementById("echartsDisease"));
+                    t.setOption(
+                        {
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                type:'scroll',
+                                orient: 'horizontal',
+                                top: 360,
+                                bottom: 20,
+                                data: ['急性髓细胞白血病（M0，M1，M2，M4，M5，M6，M7）', '急性早幼粒细胞白血病（M3）', '急性B淋巴细胞白血病',
+                                    '急性T淋巴细胞白血病', '急性混合细胞表型白血病', '髓细胞肉瘤', '骨髓增生异常综合征', '慢性粒细胞白血病',
+                                    '真性红细胞增多症', '原发性血小板增多症', '原发性骨髓纤维化', '慢性粒单核细胞白血病', '骨髓增生异常综合征/骨髓增殖性肿瘤',
+                                    '慢性淋巴细胞白血病', '非霍奇金淋巴瘤', '霍奇金淋巴瘤', '其他'],
+                                selected: data.selected
+                            },
+                            series: [
+                                {
+                                    type: 'pie',
+                                    radius: '55%',
+                                    center: ['50%', '60%'],
+                                    data: data,
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        })
+                })
+            })
+
+        $.get('Analysis/GetUserType')
+            .success(function (data) {
+                require.config({ paths: { echarts: "../assets/global/plugins/echarts/" } }), require(["echarts", "echarts/chart/pie"], function (e) {
+                    var t = e.init(document.getElementById("echartsUserType"));
+                    t.setOption(
+                        {
+                            tooltip: {
+                                trigger: 'item',
+                                formatter: "{a} <br/>{b} : {c} ({d}%)"
+                            },
+                            legend: {
+                                type: 'scroll',
+                                orient: 'horizontal',
+                                top: 360,
+                                bottom: 20,
+                                data: ['患者','家属'],
+                                selected: data.selected
+                            },
+                            series: [
+                                {
+                                    type: 'pie',
+                                    radius: '55%',
+                                    center: ['50%', '60%'],
+                                    data: data,
+                                    itemStyle: {
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        })
+                })
+            })
+    });
+</script>

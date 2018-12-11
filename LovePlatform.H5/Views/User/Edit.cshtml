@@ -1,0 +1,106 @@
+﻿@model LovePlatform.Domain.Models.User
+<form asp-controller="User" asp-action="Edit" method="post" id="form">
+    <input type="hidden" value="@Model.Id" asp-for="Id" />
+    <input type="hidden" value="@Model.WexinOpenId" asp-for="WexinOpenId" />
+    <div class="weui-cells weui-cells_radio">
+        <label class="weui-cell weui-check__label" for="x11">
+            <div class="weui-cell__bd">
+                <p>我是患者</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" class="weui-check" name="type" value="0" id="x11" asp-for="Type" required tips="请选择类别" />
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" for="x12">
+            <div class="weui-cell__bd">
+                <p>我是家属</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" class="weui-check" name="type" value="1" id="x12" asp-for="Type">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+    </div>
+    <p class="weui_cells_tips" style="color:red; text-align:center;">您和您家人的信息我们会保密的</p>
+    <p class="weui_cells_tips" style="color:red; text-align:center;">完善你的资料，可以进行自我管理</p>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">患者姓名</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="@Model.Name" required placeholder="请输入患者姓名  必填" asp-for="Name" />
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd"><label class="weui-label">性别</label></div>
+            <div class="weui-cell__bd">
+                <select class="weui-select" asp-for="Gender" name="select2">
+                    <option value="1" asp-for="Gender">男</option>
+                    <option value="2" asp-for="Gender">女</option>
+                </select>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label for="" class="weui-label">出生日期</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="date" asp-for="Birthday" value="@Model.Birthday.ToString("yyyy-MM-dd")" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">出生地</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" asp-for="BirthPlace" value="@Model.BirthPlace" required placeholder="请输入出生地  必填" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">居住地</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" asp-for="ResidentialPlace" value="@Model.ResidentialPlace" required placeholder="请输入居住地  必填" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">联系方式1</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="tel" asp-for="Contact" value="@Model.Contact" required placeholder="请输入手机号  必填">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">联系方式2</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="tel" value="@Model.ContactReserve" asp-for="ContactReserve" placeholder="选填">
+            </div>
+        </div>
+        @*<div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">联系方式3</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="tel" value="@Model.ContactReserve1" asp-for="ContactReserve1" placeholder="选填">
+            </div>
+        </div>*@
+    </div>
+    <div class="weui-btn-rea fix_btn">
+        <a class="weui-btn weui-btn_primary" id="btnSubmit">提交</a>
+    </div>
+</form>
+@section Scripts {
+    <script>
+            $('#btnSubmit').click(function () {
+                weui.form.validate('#form', function (error) {
+                    console.log(error);
+                    if (!error) {
+                        var loading = weui.loading('提交中...');
+                        $('#form').submit();
+                        setTimeout(function () {
+                            loading.hide();
+                            weui.toast('提交成功', 3000);
+                        }, 1500);
+                    }
+                });
+            })
+    </script>
+}

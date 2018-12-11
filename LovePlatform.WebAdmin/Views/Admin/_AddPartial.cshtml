@@ -1,0 +1,66 @@
+﻿@model LovePlatform.Domain.Models.Administrator
+@{
+    ViewData["Title"] = "新增管理员";
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">新增管理员</h4>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" role="form" asp-controller="User" asp-action="EditUserInfo" method="post" id="editform">
+                <input asp-for="Id" value="0" hidden />
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="LoginName">用户名</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" asp-for="LoginName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="IsSuperManager">超级管理员</label>
+                        <div class="col-md-6">
+                            <select class="form-control" asp-for="IsSuperManager">
+                                <option value="true">是</option>
+                                <option value="false">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="Password">密码</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" asp-for="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="UserDesc">描述</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" asp-for="UserDesc">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn green" onclick="Submit()">确认</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function Submit() {
+        $.ajax({
+            url: "@Url.Action("Add", "Admin")",
+            type: "POST",
+            data: $("#editform").serialize(),
+            success: function (data) {
+                $("#editmodal").empty();
+                $("#editmodal").modal("hide");
+                Search();
+            }
+        });
+    }
+</script>

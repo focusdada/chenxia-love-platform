@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>预约上门</title>
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/f.css"/>
+</head>
+<body ontouchstart>
+<div class="container">
+    <div class="weui-cells__title">服务团队</div>
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="../images/doctor.png">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">刘芳芳团队</h4>
+                    <p class="weui-media-box__desc">咨询电话：0512-65893009</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">自助预约</div>
+    <div class="weui-cells">
+        <!--<div class="weui-cell">-->
+            <!--<div class="weui-cell__hd">-->
+                <!--<label class="weui-label">家庭住址</label>-->
+            <!--</div>-->
+            <!--<div class="weui-cell__ft">苏州市吴中区甪直镇</div>-->
+        <!--</div>-->
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__hd">
+                <label class="weui-label">家庭成员</label>
+            </div>
+            <div class="weui-cell__bd">
+                <select class="weui-select" name="select2">
+                    <option value="1">王琦</option>
+                    <option value="2">顾俊</option>
+                    <option value="3">归月平</option>
+                </select>
+            </div>
+        </div>
+        <!--<div class="weui-cell">-->
+            <!--<div class="weui-cell__hd">-->
+                <!--<label class="weui-label">电话</label>-->
+            <!--</div>-->
+            <!--<div class="weui-cell__ft">15950000000</div>-->
+        <!--</div>-->
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">上门日期</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input id="time" class="weui-input" type="tel" placeholder="点击选择上门日期" readonly="readonly">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">联系人</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="请输入联系人姓名(选填)">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">联系人电话</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="tel" placeholder="请输入联系人电话(选填)">
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">症状</div>
+    <div class="weui-cells" style="margin-bottom:61px">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea id="symptom" class="weui-textarea" placeholder="请输入您的症状，上传症状照片" rows="3"></textarea>
+                <!--<div class="weui-textarea-counter"><span>0</span>/200</div>-->
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div class="weui-uploader">
+                    <!--<div class="weui-uploader__hd">-->
+                    <!--<p class="weui-uploader__title"></p>-->
+                    <!--<div class="weui-uploader__info" style="text-align: right">0/3</div>-->
+                    <!--</div>-->
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles">
+                            <li class="weui-uploader__file" style="background-image:url(../images/jinchang.jpg)"></li>
+                            <li class="weui-uploader__file weui-uploader__file_status"
+                                style="background-image:url(../images/pic_160.png)">
+                                <div class="weui-uploader__file-content">
+                                    <i class="weui-icon-warn"></i>
+                                </div>
+                            </li>
+                            <li class="weui-uploader__file weui-uploader__file_status"
+                                style="background-image:url(../images/pic_160.png)">
+                                <div class="weui-uploader__file-content">50%</div>
+                            </li>
+                        </ul>
+                        <div class="weui-uploader__input-box">
+                            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*"
+                                   multiple="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="gallery" class="weui-gallery" style="display: none">
+    <span id="galleryImg" class="weui-gallery__img" style=""></span>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+    </div>
+</div>
+<div class="weui-btn-rea fix_btn">
+    <a class="weui-btn weui-btn_primary">提交</a>
+</div>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/weui.min.js"></script>
+<script src="../js/f.js"></script>
+<script>
+    var $showDatePicker = $("#time");
+    $showDatePicker.on('click', function () {
+        weui.datePicker({
+            start: new Date().getFullYear(),
+            end: new Date().getFullYear(),
+            onChange: function (result) {
+                console.log(result);
+            },
+            onConfirm: function (result) {
+                console.log(result);
+                $showDatePicker.val(result[0] + "-" + (result[1] + 1) + "-" + result[2]);
+            }
+        });
+    });
+
+    $(".fix_btn a").on("click", function () {
+        if (f.reg_txt($showDatePicker.val(), "请选择上门日期") && f.reg_txt($("#symptom").val(), "症状不能为空")) {
+            location.href = "预约上门_提交成功.html"
+        }
+    });
+</script>
+</body>
+</html>

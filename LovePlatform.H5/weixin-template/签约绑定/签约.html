@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>签约/绑定</title>
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/f.css"/>
+</head>
+<body ontouchstart>
+<div class="container">
+    <div class="weui-cells weui-cells__form id">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">身份证号</label></div>
+            <div class="weui-cell__bd weui-cell__primary">
+                <input id="id" class="weui-input" type="number" placeholder="请输入身份证号">
+            </div>
+        </div>
+    </div>
+    <article class="weui-article tips">
+        <p>
+            “签约一生”微信公众号是为家庭医生和社区居民打造的便捷服务平台。请数据输入居民身份证号码，自动完成以下操作：
+        </p>
+        <p>
+            <b>绑定（已经签约的居民）</b>：若您已经签约家庭医生，系统会自动绑定微信平台。成功绑定即可在本平台预约医生上门，查看治疗记录和家庭成员信息。
+        </p>
+        <p>
+            <b>签约（未签约的居民）</b>：若您尚未签约，可以通过本平台直接签约家庭医生。选择自己居住社区的卫生服务中心或站点进行签约。
+        </p>
+    </article>
+    <div class="weui-btn-rea fix_btn">
+        <a class="weui-btn weui-btn_primary">下一步</a>
+    </div>
+</div>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/f.js"></script>
+<script>
+    $(".fix_btn a").on("click", function () {
+        if(f.reg_id($("#id").val())){
+            location.href="未签约_搜索家庭.html"
+        }
+    })
+</script>
+</body>
+</html>

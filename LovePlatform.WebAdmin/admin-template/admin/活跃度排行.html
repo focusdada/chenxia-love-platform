@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-dark bold uppercase">活跃度统计</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="echarts" style="height: 600px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--初始化用-->
+<script src="../assets/global/plugins/echarts/echarts.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        require.config({paths: {echarts: "../assets/global/plugins/echarts/"}}), require(["echarts", "echarts/chart/bar", "echarts/chart/chord", "echarts/chart/eventRiver", "echarts/chart/force", "echarts/chart/funnel", "echarts/chart/gauge", "echarts/chart/heatmap", "echarts/chart/k", "echarts/chart/line", "echarts/chart/map", "echarts/chart/pie", "echarts/chart/radar", "echarts/chart/scatter", "echarts/chart/tree", "echarts/chart/treemap", "echarts/chart/venn", "echarts/chart/wordCloud"], function (e) {
+            var t = e.init(document.getElementById("echarts"));
+            t.setOption(
+                {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    legend: {
+                        data: ['周登陆次数', '血压更新次数', '体重更新次数']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01]
+                    },
+                    yAxis: [
+                        {
+                            name: '患者姓名',
+                            type: 'category',
+                            data: ['张三', '李四', '王五', '刘六', '赵七']
+                        },
+                        {
+                            name: '护士姓名',
+                            type: 'category',
+                            data: ['王琦', '朱成林', '崔尖', '归月平', '王少思']
+                        }
+                    ],
+                    series: [
+                        {
+                            name: '体重更新次数',
+                            type: 'bar',
+                            data: [15, 16, 18, 19, 22]
+                        },
+                        {
+                            name: '周登陆次数',
+                            type: 'bar',
+                            data: [18, 23, 29, 104, 131]
+                        },
+                        {
+                            name: '血压更新次数',
+                            type: 'bar',
+                            data: [19, 23, 31, 121, 134]
+                        }
+                    ]
+                })
+        })
+    });
+</script>

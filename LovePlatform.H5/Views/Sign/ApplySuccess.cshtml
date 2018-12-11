@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title></title>
+    <link rel="stylesheet" href="~/css/weui.min.css" />
+</head>
+<body ontouchstart>
+    <div class="weui-msg">
+        <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">操作成功</h2>
+            @if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <p class="weui-msg__desc">@ViewBag.Message</p>
+            }
+        </div>
+        <div class="weui-btn-rea" style="padding: 0 15px">
+            <a class="weui-btn weui-btn_primary" onclick="finish()">完成</a>
+        </div>
+    </div>
+    <script src="~/js/zepto.min.js"></script>
+    <script>
+        function finish() {
+            setTimeout(function () {
+                WeixinJSBridge.call('closeWindow');
+            }, 1000)
+        }
+    </script>
+</body>
+</html>

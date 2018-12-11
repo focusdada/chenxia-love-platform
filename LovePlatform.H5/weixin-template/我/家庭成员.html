@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>家庭成员</title>
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/f.css"/>
+</head>
+<body ontouchstart>
+<div class="container">
+    <div class="weui-cells__title title_dialog">
+        本人信息
+    </div>
+    <div class="flist list" style="margin-bottom: 25px;">
+        <div class="weui-cells" style="margin-top: 0">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">身份证号</label>
+                </div>
+                <div id="id" class="weui-cell__ft">320586199112100552</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">生日</label>
+                </div>
+                <div id="birth" class="weui-cell__ft">-</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">姓名</label>
+                </div>
+                <div id="name" class="weui-cell__ft">王琦</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">联系电话</label>
+                </div>
+                <div id="tel" class="weui-cell__ft">15950035957</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">性别</label>
+                </div>
+                <div id="sex" class="weui-cell__ft">-</div>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="family_d" class="add-family" style="bottom: 30px">
+    <img src="../images/addfamily.png">
+    <p class="weui_cell_ft">新增成员</p>
+</a>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/f.js"></script>
+<script>
+    $(function () {
+        //提取身份证信息
+        var id = $("#id").text();
+        $("#birth").text(f.extract_id(id).birth);
+        $("#sex").text(f.extract_id(id).sex);
+
+        //添加成员
+        var family = {
+            id: "family_d"
+        };
+        f.dialog(family);
+
+        //成员列表
+        var flist = [
+            {
+                rel: "父亲",
+                id: "320586198812100000",
+                birth: "1988-12-10",
+                name: "王父",
+                tel: "15900000000",
+                sex: "男",
+                type: "0"
+            },
+            {
+                rel: "母亲",
+                id: "320586198812100000",
+                birth: "1988-12-10",
+                name: "王母",
+                tel: "15900000000",
+                sex: "女",
+                type: "1"
+            }
+        ];
+
+        //删除
+        var e = {
+            id: "btn_del",
+            title: "请选择删除理由"
+        };
+        f.dialog_list(e, flist);
+        f.dialog_list_click(e, flist);
+    });
+</script>
+</body>
+</html>

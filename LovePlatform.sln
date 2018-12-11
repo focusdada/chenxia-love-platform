@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LovePlatform.WebAdmin", "LovePlatform.WebAdmin\LovePlatform.WebAdmin.csproj", "{A84152A9-3823-4FF5-BDAF-5D0306A375D5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8B82124F-E566-450B-A3FB-19BFDDD4D728} = {8B82124F-E566-450B-A3FB-19BFDDD4D728}
+		{D11BD3D1-0795-41CD-866D-AD6432191569} = {D11BD3D1-0795-41CD-866D-AD6432191569}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovePlatform.Repository", "LovePlatform.Repository\LovePlatform.Repository.csproj", "{A1EB2415-0623-4075-9586-C316CAB194F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8B82124F-E566-450B-A3FB-19BFDDD4D728} = {8B82124F-E566-450B-A3FB-19BFDDD4D728}
+		{B7E2EF72-2C3E-4218-BEF6-C5AB201A279C} = {B7E2EF72-2C3E-4218-BEF6-C5AB201A279C}
+		{A049A4B4-96A7-468F-BFFA-7036847EAA2B} = {A049A4B4-96A7-468F-BFFA-7036847EAA2B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovePlatform.Common", "LovePlatform.Common\LovePlatform.Common.csproj", "{B7E2EF72-2C3E-4218-BEF6-C5AB201A279C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovePlatform.Domain", "LovePlatform.Domain\LovePlatform.Domain.csproj", "{8B82124F-E566-450B-A3FB-19BFDDD4D728}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B7E2EF72-2C3E-4218-BEF6-C5AB201A279C} = {B7E2EF72-2C3E-4218-BEF6-C5AB201A279C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovePlatform.Service", "LovePlatform.Service\LovePlatform.Service.csproj", "{D11BD3D1-0795-41CD-866D-AD6432191569}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A1EB2415-0623-4075-9586-C316CAB194F8} = {A1EB2415-0623-4075-9586-C316CAB194F8}
+		{8B82124F-E566-450B-A3FB-19BFDDD4D728} = {8B82124F-E566-450B-A3FB-19BFDDD4D728}
+		{A049A4B4-96A7-468F-BFFA-7036847EAA2B} = {A049A4B4-96A7-468F-BFFA-7036847EAA2B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovePlatform.DTO", "LovePlatform.DTO\LovePlatform.DTO.csproj", "{A049A4B4-96A7-468F-BFFA-7036847EAA2B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B7E2EF72-2C3E-4218-BEF6-C5AB201A279C} = {B7E2EF72-2C3E-4218-BEF6-C5AB201A279C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LovePlatform.WebAPI", "LovePlatform.WebAPI\LovePlatform.WebAPI.csproj", "{A81456AB-3EA9-405E-B243-CB010D2B9511}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LovePlatform.H5", "LovePlatform.H5\LovePlatform.H5.csproj", "{3EE751BD-1ADC-4C92-8D72-A75F62D2C334}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A84152A9-3823-4FF5-BDAF-5D0306A375D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A84152A9-3823-4FF5-BDAF-5D0306A375D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A84152A9-3823-4FF5-BDAF-5D0306A375D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A84152A9-3823-4FF5-BDAF-5D0306A375D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1EB2415-0623-4075-9586-C316CAB194F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1EB2415-0623-4075-9586-C316CAB194F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1EB2415-0623-4075-9586-C316CAB194F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1EB2415-0623-4075-9586-C316CAB194F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7E2EF72-2C3E-4218-BEF6-C5AB201A279C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7E2EF72-2C3E-4218-BEF6-C5AB201A279C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7E2EF72-2C3E-4218-BEF6-C5AB201A279C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7E2EF72-2C3E-4218-BEF6-C5AB201A279C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B82124F-E566-450B-A3FB-19BFDDD4D728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B82124F-E566-450B-A3FB-19BFDDD4D728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B82124F-E566-450B-A3FB-19BFDDD4D728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B82124F-E566-450B-A3FB-19BFDDD4D728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D11BD3D1-0795-41CD-866D-AD6432191569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D11BD3D1-0795-41CD-866D-AD6432191569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D11BD3D1-0795-41CD-866D-AD6432191569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D11BD3D1-0795-41CD-866D-AD6432191569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A049A4B4-96A7-468F-BFFA-7036847EAA2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A049A4B4-96A7-468F-BFFA-7036847EAA2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A049A4B4-96A7-468F-BFFA-7036847EAA2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A049A4B4-96A7-468F-BFFA-7036847EAA2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A81456AB-3EA9-405E-B243-CB010D2B9511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A81456AB-3EA9-405E-B243-CB010D2B9511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A81456AB-3EA9-405E-B243-CB010D2B9511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A81456AB-3EA9-405E-B243-CB010D2B9511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EE751BD-1ADC-4C92-8D72-A75F62D2C334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EE751BD-1ADC-4C92-8D72-A75F62D2C334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EE751BD-1ADC-4C92-8D72-A75F62D2C334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EE751BD-1ADC-4C92-8D72-A75F62D2C334}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

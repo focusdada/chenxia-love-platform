@@ -1,0 +1,93 @@
+﻿@using LovePlatform.DTO.Common;
+@using LovePlatform.Domain.Models;
+@model Page<UserDto>
+
+<div class="table-scrollable table-scrollable-borderless">
+    <table class="table table-hover table-light">
+        <thead>
+            <tr class="uppercase">
+                <th>患者姓名</th>
+                <th>用户类别</th>
+                <th>性别</th>
+                <th>出生年月</th>
+                <th>出生地</th>
+                <th>居住地</th>
+                <th>联系方式</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Items != null && Model.Items.Count > 0)
+            {
+                @foreach (var item in Model.Items)
+                {
+            <tr>
+                <td><a href="javascript:Edit(@item.Id)">@item.Name</a></td>
+                <td>@item.Type</td>
+                <td>@item.Gender</td>
+                <td>@item.Birthday</td>
+                <td>@item.BirthPlace</td>
+                <td>@item.ResidentialPlace</td>
+                <td>@item.Contact</td>
+                <td>
+                    @*<button type="button" class="btn btn-default btn-sm" onclick="$.index.pageJump(this)" value="@Html.Raw(Url.Action("Detail", "Patient", new { id = item.Id, pageIndex = Model.CurrentPage }))">详情</button>*@
+                    <a class="btn btn-default btn-sm" href="@Html.Raw(Url.Action("Detail", "User", new { id = item.Id }))">详情</a>
+                    <a class="btn btn-default btn-sm" href="javascript:EditDiagnose(@item.Id)">疾病诊断</a>
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<hr style="margin-top: 0">
+<div id="pagetoolbar"></div>
+<script>
+    $(function () {
+        $("#pagetoolbar").bs_pagination({
+            currentPage: @Model.CurrentPage,
+            rowsPerPage: 10,
+            maxRowsPerPage: 100,
+            totalPages: @Model.TotalPages,
+            totalRows: @Model.TotalRecords,
+
+            showGoToPage: true,
+            showRowsPerPage: false,
+            showRowsInfo: false,
+            showRowsDefaultInfo: true,
+
+            onChangePage: function (data, param) { // 点击后返回page_num和rows_per_page
+                $("#PageIndex").val(param.currentPage);
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("List", "User")",
+                    data: $("#searchform").serialize(),
+                    success: function (data) {
+                        $("#datagrid").empty();
+                        $("#datagrid").html(data);
+                    },
+                    error: function (e) {
+                        console.error(e.message);
+                    }
+                });
+            },
+            onLoad: function () { // 在插件加载时返回page_num和rows_per_page
+            }
+        });
+    })
+
+     function Edit(id) {
+        $("#editmodal").empty();
+
+        $("#editmodal").load("@Url.Action("EditUserInfo", "User")" + "?id=" + id);
+
+        $("#editmodal").modal("show");
+    }
+
+    function EditDiagnose(id){
+        $("#editmodal").empty();
+
+        $("#editmodal").load("@Url.Action("EditDiagnose", "User")" + "?id=" + id);
+
+        $("#editmodal").modal("show");
+    }
+</script>

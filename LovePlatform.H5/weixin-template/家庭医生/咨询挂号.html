@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>资讯挂号</title>
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/f.css"/>
+</head>
+<body ontouchstart>
+<div class="container">
+    <div class="weui-cells__title">症状</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea id="symptom" class="weui-textarea" placeholder="请输入您的症状，上传症状照片" rows="3"></textarea>
+                <!--<div class="weui-textarea-counter"><span>0</span>/200</div>-->
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div class="weui-uploader">
+                    <!--<div class="weui-uploader__hd">-->
+                        <!--<p class="weui-uploader__title"></p>-->
+                        <!--<div class="weui-uploader__info" style="text-align: right">0/3</div>-->
+                    <!--</div>-->
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles">
+                            <li class="weui-uploader__file" style="background-image:url(../images/jinchang.jpg)"></li>
+                            <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(../images/pic_160.png)">
+                                <div class="weui-uploader__file-content">
+                                    <i class="weui-icon-warn"></i>
+                                </div>
+                            </li>
+                            <li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(../images/pic_160.png)">
+                                <div class="weui-uploader__file-content">50%</div>
+                            </li>
+                        </ul>
+                        <div class="weui-uploader__input-box">
+                            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">希望得到的帮助</div>
+    <div class="weui-cells weui-cells_radio">
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p>在线咨询</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" class="weui-check" name="radio" value="0" checked>
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label">
+            <div class="weui-cell__bd">
+                <p>预约专家门诊</p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" class="weui-check" name="radio" value="1">
+                <span class="weui-icon-checked"></span>
+            </div>
+        </label>
+    </div>
+</div>
+<div id="gallery" class="weui-gallery" style="display: none">
+    <span id="galleryImg" class="weui-gallery__img" style=""></span>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+    </div>
+</div>
+<div class="weui-btn-rea fix_btn">
+    <a class="weui-btn weui-btn_primary">提交</a>
+</div>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/f.js"></script>
+<script>
+    $(".fix_btn a").on("click", function () {
+        if (f.reg_txt($("#symptom").val(),"症状不能为空")&&$("input[name='radio']:checked").val()=="0") {
+            location.href = "咨询挂号_咨询_提交成功.html"
+        }
+        else if (f.reg_txt($("#symptom").val(),"症状不能为空")&&$("input[name='radio']:checked").val()=="1"){
+            location.href = "咨询挂号_挂号_提交成功.html"
+        }
+    });
+</script>
+</body>
+</html>

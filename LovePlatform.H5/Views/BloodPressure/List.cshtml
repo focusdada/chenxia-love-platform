@@ -1,0 +1,58 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>血压</title>
+    <link rel="stylesheet" href="~/css/weui.min.css" />
+    <link rel="stylesheet" href="~/css/f.css" />
+</head>
+<body ontouchstart>
+    <div class="container cDisease_container">
+        <div class="weui-tab cDisease_weui-tab">
+            <div class="weui-navbar cDisease_tab">
+                <a class="weui-navbar__item weui-bar__item_on" onclick="topTen()">
+                    最近10次
+                </a>
+                <a class="weui-navbar__item" onclick="topTwenty()">
+                    最近20次
+                </a>
+                <a class="weui-navbar__item" onclick="topThirty()">
+                    最近30次
+                </a>
+            </div>
+        </div>
+        <div id="listdata"></div>
+    </div>
+    <script src="~/js/zepto.min.js"></script>
+    <script src="~/js/f.js"></script>
+    <script src="~/js/fusioncharts.js"></script>
+    <script src="~/js/fusioncharts.charts.js"></script>
+    <script>
+        $(function () {
+            topTen();
+        })
+
+        function topTen() {
+            loadData(10);
+        }
+
+        function topTwenty() {
+            loadData(20);
+        }
+
+        function topThirty() {
+            loadData(30);
+        }
+
+        function loadData(topNumber) {
+            $("#listdata").load("@Url.Action("ListPartial", "BloodPressure", new { patientId = ViewBag.PatientId })" + "&topNumber=" + topNumber);
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,175 @@
+﻿@using LovePlatform.Common
+@using LovePlatform.Domain.Models
+@model Tuple<UserDto, Diagnose, List<Treat>, List<TreatImage>>
+
+<style>
+    .portlet {
+        margin-bottom: 0px;
+    }
+
+        .portlet > .portlet-title > .nav-tabs > li > a {
+            color: #9f9f9f;
+        }
+
+        .portlet > .portlet-title > .nav-tabs {
+            float: left;
+        }
+
+    .tab-content > .tab-pane,
+    .pill-content > .pill-pane {
+        display: block; /* undo display:none */
+        height: 0; /* height:0 is also invisible */
+        overflow-y: hidden; /* no-overflow */
+    }
+
+    .tab-content > .active,
+    .pill-content > .active {
+        height: auto; /* let the content decide it */
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="profile-sidebar">
+            <div class="portlet light profile-sidebar-portlet ">
+                <div class="profile-userpic">
+                    @if (string.IsNullOrEmpty(Model.Item1.Avatar))
+                    {
+                        <img src="~/images/患者.png" class="img-responsive" alt="">
+                    }
+                    else
+                    {
+                        <img src="@Model.Item1.Avatar" class="img-responsive" alt="">
+                    }
+                </div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">@Model.Item1.Name</div>
+                </div>
+                <div class="profile-userbuttons">
+                    <span class="badge badge-info">@Model.Item1.Gender</span>
+                </div>
+                <div class="profile-usermenu" style="color:#93a3b5;">
+                    <ul class="nav">
+                        <li>
+                            <a href="javascript:void(0)">
+                                <div class="row">
+                                    <div class="col-md-4">疾病类型:</div>
+                                    <div class="col-md-8 ">@EnumHelper.GetDescription((DiseasesTypeEnum)Model.Item2.DiseasesType)</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <div class="row">
+                                    <div class="col-md-4">染色体:</div>
+                                    <div class="col-md-8 text-wrap">@Model.Item2.Chromosomal</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <div class="row">
+                                    <div class="col-md-4">免疫分型:</div>
+                                    <div class="col-md-8 text-wrap">@Model.Item2.Immunophenotyping</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <div class="row">
+                                    <div class="col-md-4">融合基因:</div>
+                                    <div class="col-md-8 text-wrap">@Model.Item2.FusionGene</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)">
+                                <div class="row">
+                                    <div class="col-md-4">二代基因测序:</div>
+                                    <div class="col-md-8 text-wrap">@Model.Item2.SecondGenerationGeneSequencing</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-dark sbold uppercase">治疗记录</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-primary btn-sm" href="javascript:AddTreat(@Model.Item1.Id)">新增</a>
+                    <a class="btn btn-default btn-sm" href="@Url.Action("Index", "User")">返回</a>
+                </div>
+            </div>
+            <div class="portlet-body" id="datagrid">
+                @foreach (var item in Model.Item3)
+                {
+                    <div class="row">
+                        <div class="col-md-2 text-left">@item.TreatDate</div>
+                        <div class="col-md-4 text-left">@item.TreatDoctor</div>
+                        <div class="col-md-6 text-right">@item.TreatPlace</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12 text-info" style="cursor:pointer;" onclick="EditTreat(@item.Id)">@item.TreateDetail</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        @foreach (var image in Model.Item4.Where(x => x.TreatId == item.Id).ToList())
+                        {
+                        <div class="col-md-3">
+                            <img width="120" src="@image.ImagePath" alt="Treat Image" class="img-rounded">
+                            <span class="glyphicon glyphicon-remove" onclick="DeleteImg(@image.Id,this)" style="cursor:pointer"></span>
+                        </div>
+                        }
+                    </div>
+                    <hr>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<div class="modal fade" id="promptmodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<div class="modal fade" id="errormodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<!--初始化用-->
+<script>
+    $(function () {
+        $("#usernav").addClass("start active open");
+        $('.popovers').popover();
+    });
+
+    function AddTreat(id) {
+        $("#editmodal").empty();
+
+        $("#editmodal").load("@Url.Action("AddTreat", "User")" + "?id=" + id);
+
+        $("#editmodal").modal("show");
+    }
+
+    function EditTreat(id) {
+        $("#editmodal").empty();
+
+        $("#editmodal").load("@Url.Action("EditTreat", "User")" + "?id=" + id);
+
+        $("#editmodal").modal("show");
+    }
+
+    function DeleteImg(id, obj) {
+        $.get('/user/DeleteTreatImage', { id: id })
+            .success(function (data) {
+                $(obj).parent().hide();
+            })
+    }
+</script>

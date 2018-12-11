@@ -1,0 +1,58 @@
+﻿@using LovePlatform.Domain.Models
+@model Diagnose
+@{
+    ViewData["Title"] = "诊疗记录";
+}
+<form asp-controller="Diagnose" asp-action="Edit" id="form">
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">疾病类型</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="@Model.DiseasesType" required asp-for="DiseasesType" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">染色体</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="@Model.Chromosomal" asp-for="Chromosomal" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">免疫分型</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="@Model.Immunophenotyping" asp-for="Chromosomal" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">融合基因</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="@Model.FusionGene" asp-for="Chromosomal" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">二代基因测序</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="@Model.SecondGenerationGeneSequencing" asp-for="Chromosomal" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <a href="javascript:void(0);" id="btnSubmit" class="weui-btn weui-btn_primary">提交</a>
+</form>
+@section Scripts {
+    <script>
+            $('#btnSubmit').click(function () {
+                weui.form.validate('#form', function (error) {
+                    console.log(error);
+                    if (!error) {
+                        var loading = weui.loading('提交中...');
+                        $('#editForm').submit();
+                        setTimeout(function () {
+                            loading.hide();
+                            weui.toast('提交成功', 3000);
+                        }, 1500);
+                    }
+                });
+            })
+    </script>
+}

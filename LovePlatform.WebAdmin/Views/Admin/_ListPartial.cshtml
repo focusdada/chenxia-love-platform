@@ -1,0 +1,45 @@
+﻿@using LovePlatform.Domain.Models;
+@model List<Administrator>
+
+<div class="table-scrollable table-scrollable-borderless">
+    <table class="table table-hover table-light">
+        <thead>
+            <tr class="uppercase">
+                <th>用户名</th>
+                <th>超级管理员</th>
+                <th>描述</th>
+                <th>创建日期</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td><a href="javascript:Edit(@item.Id)">@item.LoginName</a></td>
+                <td>@(item.IsSuperManager == true ? "是" : "否")</td>
+                <td>@item.UserDesc</td>
+                <td>@item.AddTime</td>
+                <td>
+                    <a class="btn btn-default btn-sm" href="javascript:Edit(@item.Id)">编辑</a>
+                    @*<a class="btn btn-warning btn-sm" href="javascript:Delete(@item.Id)">删除</a>*@
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    function Delete(id) {
+        if (window.confirm("确定删除")) {
+            //
+        }
+
+    }
+    function Edit(id) {
+        $("#editmodal").empty();
+
+        $("#editmodal").load("@Url.Action("Edit", "Admin")" + "?id=" + id);
+
+        $("#editmodal").modal("show");
+    }
+</script>

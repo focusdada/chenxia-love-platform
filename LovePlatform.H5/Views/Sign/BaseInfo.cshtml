@@ -1,0 +1,99 @@
+﻿@using LovePlatform.DTO.H5;
+@model SignBaseInfo
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>基本信息</title>
+    <link rel="stylesheet" href="~/css/weui.min.css" />
+    <link rel="stylesheet" href="~/css/f.css" />
+</head>
+<body ontouchstart>
+    <div class="container">
+        <div class="weui-tab">
+            <div class="progress_bar">
+                <div class="progress_bar_item progress_bar_item_on">
+                    基本信息
+                </div>
+                <div class="progress_bar_item">
+                    签约信息
+                </div>
+            </div>
+        </div>
+        <form asp-controller="Sign" asp-action="AddSignSuccess" method="post" enctype="multipart/form-data">
+            <input asp-for="OpenId" hidden />
+            <div class="weui-cells id">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label">添加照片</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <div class="weui-uploader">
+                            <div class="weui-uploader__bd">
+                                <ul class="weui-uploader__files" id="uploaderFiles2"></ul>
+                                <div class="weui-uploader__input-box" style="margin:0;">
+                                    <input id="uploaderIdPhoto" class="weui-uploader__input" type="file" />
+                                    <input asp-for="Avatar" hidden />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label" asp-for="Name">姓名</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input asp-for="Name" class="weui-input" type="text" placeholder="请输入姓名" />
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label" asp-for="Phone">电话</label>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <input asp-for="Phone" class="weui-input" type="text" placeholder="请输入电话" />
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd">
+                        <label class="weui-label" asp-for="IDNo">身份证号</label>
+                    </div>
+                    <div id="id" class="weui-cell__ft">@Model.IDNo</div>
+                    <input asp-for="IDNo" hidden />
+                </div>
+            </div>
+            <div class="weui-btn-rea fix_btn">
+                <a class="weui-btn weui-btn_primary" onclick="next()">下一步</a>
+            </div>
+        </form>
+    </div>
+    <script src="~/js/zepto.min.js"></script>
+    <script src="~/js/f.js"></script>
+    <script>
+        $(function () {
+            if ($("#Avatar").val() != "") {
+                var tmpl2 = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+                    $uploaderFiles2 = $("#uploaderFiles2");
+                $uploaderFiles2.html($(tmpl2.replace('#url#', $("#Avatar").val())));
+                $(".weui-uploader__input-box").hide();
+            }
+        })
+
+        function next() {
+            if (f.reg_name($("#Name").val())
+                && f.reg_phone($("#Phone").val())
+                && f.reg_address($("#communty").text())
+                && f.reg_building($("#Building").val())
+                && f.reg_room($("#Room").val())) {
+                $("form").submit();
+            }
+        }
+    </script>
+</body>
+</html>

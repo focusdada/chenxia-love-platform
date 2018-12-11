@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>签约成功</title>
+    <link rel="stylesheet" href="~/css/weui.min.css" />
+    <style>
+        .teamImg {
+            width: 120px;
+            height: 120px;
+            display: inline-table;
+            border-radius: 50%;
+            background-size: cover;
+        }
+
+            .teamImg img {
+                width: 20px;
+                right: 34%;
+                top: 40px;
+                position: absolute;
+            }
+    </style>
+</head>
+<body ontouchstart>
+    <div class="container">
+        <div class="weui-msg">
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">签约成功</h2>
+            </div>
+            <div class="weui-btn-rea" style="padding: 0 15px">
+                <a class="weui-btn weui-btn_primary" onclick="finish()">完成</a>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/zepto.min.js"></script>
+    <script>
+        function finish() {
+            setTimeout(function () {
+                WeixinJSBridge.call('closeWindow');
+            }, 1000)
+        }
+    </script>
+</body>
+</html>

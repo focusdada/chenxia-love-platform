@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>服务包</title>
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/f.css"/>
+</head>
+<body ontouchstart>
+<div class="container">
+    <div class="preview_list list">
+    </div>
+</div>
+<div class="weui-tab">
+    <div class="progress_bar">
+        <div class="progress_bar_item">
+            地址
+        </div>
+        <div class="progress_bar_item">
+            成员
+        </div>
+        <div class="progress_bar_item progress_bar_item_on_end">
+            服务包
+        </div>
+    </div>
+</div>
+<div class="weui-btn-rea fix_btn">
+    <a class="weui-btn weui-btn_primary">完成签约</a>
+</div>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/f.js"></script>
+<script>
+    $(function () {
+        var e = {id: "package"};
+        var package =
+            [
+                {
+                    id: 0,
+                    title: '基础服务包',
+                    price: "0.00",
+                    time: "2016.12.1 至 2017.12.1",
+                    p: "<article class='weui_article clause'>" +
+                    '<p>服务包简介：家庭医生签约时默认服务包。包含基本家庭健康服务。</p>' +
+                    '<p>有效时间：2016.12.1-2017.12.1</p>' +
+                    '<p>价格：0.00 元</p>' +
+                    '<p>服务包内容：（服务项）</p>' +
+                    '<p>1、提供健康教育、健康咨询、妇幼保健及健康档案管理等基本公共卫生服务</p>' +
+                    '<p>2、65周岁以上老人每年一次健康体检，每3个月提供一次健康指导及随访</p>' +
+                    '<p>3、高血压、糖尿病居民提供血压血糖监测、用药指导、不良生活方式干预、综合评估等服务。</p>' +
+                    '<p>4、对肿瘤、精神病、传染病等特殊病提供健康管理服务</p>' +
+                    '<p>5、因长期卧床行动不便居民，提供家庭病床式上门服务；病情复杂或病情控制不佳的居民协助专科医生给予个性化诊疗。</p>' +
+                    '<p>6、因病情需要转上级二、三级医院、专科医院就诊住院的提供转诊服务</p>' +
+                    '<p>7、提供慢性病医保申请、药费报销等相关医保服务。对全年医药费个人负担较重的提出合理化诊疗方案，减轻家庭医疗费用支出。</p>' +
+                    '<p>8、对签约家庭成员定期提供健康、疾病诊疗综合评价</p>' +
+                    "</article>"
+                },
+                {
+                    id: 1,
+                    title: '糖尿病检测服务包',
+                    price: "288.00",
+                    time: "2016.12.1 至 2017.12.1",
+                    p: "<article class='weui_article clause'>" +
+                    '<p>服务包简介：为家庭成员提供糖尿病检测服务</p>' +
+                    '<p>有效时间：2016.12.1-2017.12.1</p>' +
+                    '<p>价格：288.00 元</p>' +
+                    '<p>服务包内容：（服务项）</p>' +
+                    '<p>糖尿病检测服务</p>'+
+                    "</article>"
+                },
+                {
+                    id: 2,
+                    title: '中医针灸服务包',
+                    price: "588.00",
+                    time: "2016.12.1 至 2017.12.1",
+                    p:"<article class='weui_article clause'>" +
+                    '<p>服务包简介：为家庭成员提供针灸服务</p>' +
+                    '<p>有效时间：2016.12.1-2017.12.1</p>' +
+                    '<p>价格：588.00 元</p>' +
+                    '<p>服务包内容：（服务项）</p>' +
+                    '<p>局部针灸：4次</p>' +
+                    '<p>全身针灸：5次</p>'+
+                    "</article>"
+                },
+                {
+                    id: 4,
+                    title: '其他服务包',
+                    price: "588.00",
+                    time: "2016.12.1 至 2017.12.1",
+                    p:"<article class='weui_article clause'>" +
+                    '<p>服务包简介：其他灸服务</p>' +
+                    '<p>有效时间：2016.12.1-2017.12.1</p>' +
+                    '<p>价格：0.00 元</p>' +
+                    '<p>服务包内容：（服务项）</p>' +
+                    "</article>"
+                }
+            ];
+        //建立服务包列表
+        f.dialog_list(e, package);
+        //列表点击
+        f.dialog_list_click(e, package);
+
+        $(".fix_btn a").on("click", function () {
+            location.href = "../home.html"
+        });
+    });
+</script>
+</body>
+</html>

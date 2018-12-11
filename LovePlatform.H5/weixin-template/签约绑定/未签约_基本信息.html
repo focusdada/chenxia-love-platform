@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>基本信息</title>
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/f.css"/>
+</head>
+<body ontouchstart>
+<div class="container">
+    <div class="weui-cells id">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>身份证号</p>
+            </div>
+            <div class="weui-cell__ft">320586199112100552</div>
+        </div>
+    </div>
+    <div class="weui-cells address">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_text">
+                <ul class="weui-media-box__info">
+                    <li class="weui-media-box__info__meta">当前定位</li>
+                    <li class="weui-media-box__info__meta">江苏省 盐城市 亭湖区</li>
+                </ul>
+            </div>
+            <a class="weui-cell weui-cell_access" href="未签约_家庭地址_省.html">
+                <div class="weui-cell__bd">
+                    <p>地区</p>
+                </div>
+                <div class="weui-cell__ft">亭湖区</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="未签约_家庭地址_街道.html">
+                <div class="weui-cell__bd">
+                    <p>街道</p>
+                </div>
+                <div class="weui-cell__ft">五星街道卫生服务中心</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="未签约_家庭地址_社区.html">
+                <div class="weui-cell__bd">
+                    <p>社区</p>
+                </div>
+                <div class="weui-cell__ft">五星社区</div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="未签约_家庭地址_小区.html">
+                <div class="weui-cell__bd">
+                    <p>小区</p>
+                </div>
+                <div id="ra" class="weui-cell__ft">五星新村一区</div>
+            </a>
+            <div class="weui-cell">
+                <div class="weui_cell__hd"><label class="weui-label">详细</label></div>
+                <div class="weui_cell__bd weui_cell_primary">
+                    <input id="building" class="weui-input" placeholder="请输入">
+                </div>
+                <label class="building">幢</label>
+                <div class="weui_cell__bd weui_cell_primary">
+                    <input id="room" class="weui-input" placeholder="请输入">
+                </div>
+                <label class="room">室</label>
+            </div>
+        </div>
+    </div>
+    <div class="weui-panel weui-panel_access team">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="../images/jinchang.jpg" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title">王琦医生团队</h4>
+                    <p class="weui-media-box__desc">五星街道卫生服务中心</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title title_dialog">
+        <a id="sign">如已签约，点击这里</a>
+    </div>
+</div>
+<div class="weui-tab">
+    <div class="progress_bar">
+        <div class="progress_bar_item progress_bar_item_on">
+            基本信息
+        </div>
+        <div class="progress_bar_item">
+            签约信息
+        </div>
+        <div class="progress_bar_item">
+            选择团队
+        </div>
+    </div>
+</div>
+<div class="weui-btn-rea fix_btn">
+    <a class="weui-btn weui-btn_primary">下一步</a>
+</div>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/f.js"></script>
+<script>
+    $(function () {
+        var e = {
+            id: "sign",
+            p: "<p>亲爱的用户：</p><p>若您已经签约家庭医生，但在本平台输入身份证号码后无签约信息。可能由信息没有及时更新、数据录入时有误等原因。您可以留下您的联系方式，稍后由社区卫生工作人员或家庭医生客服人员排查后联系您。</p>"
+        };
+        f.dialog(e);
+    });
+
+    $(".fix_btn a").on("click", function () {
+        if (f.reg_address_select($("#ra").text()) &&
+            f.reg_address($("#building").val()) &&
+            f.reg_address($("#room").val())) {
+            location.href = "未签约_家庭成员.html"
+        }
+    });
+</script>
+</body>
+</html>

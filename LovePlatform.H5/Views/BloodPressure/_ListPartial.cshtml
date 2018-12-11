@@ -1,0 +1,157 @@
+@using LovePlatform.DTO.WebAPI
+@model List<BloodPressureDto>
+@{
+    Layout = null;
+    List<string> category = new List<string>();
+    List<int> systolicPressure = new List<int>();
+    List<int> diastolicPressure = new List<int>();
+}
+
+<div id="chartContainer"></div>
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        category.Add(item.AddTime.ToString("yyyy-MM-dd HH:mm:ss"));
+        systolicPressure.Add(item.SystolicPressure);
+        diastolicPressure.Add(item.DiastolicPressure);
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">检测时间<i></i>@item.AddTime.ToString("yyyy-MM-dd HH:mm:ss")</label>
+                    @if (item.IsDoctorInput)
+                    {
+                        <span class="weui-form-preview__value"><img src="~/images/chronic_ys.png" /></span>
+                    }
+                    else
+                    {
+                        <span class="weui-form-preview__value"><img src="~/images/chronic_wx.png" /></span>
+                    }
+                </div>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item cDisease_list_4">
+                    <label class="weui-form-preview__label">收缩压</label>
+                    <label class="weui-form-preview__label">舒张压</label>
+                    <label class="weui-form-preview__label">心率</label>
+                    <label class="weui-form-preview__label">检测结果</label>
+                </div>
+                <div class="weui-form-preview__item cDisease_list_4">
+                    @if (item.SystolicPressureIsNormal)
+                    {
+                        <label class="weui-form-preview__label">@item.SystolicPressure</label>
+                    }
+                    else
+                    {
+                        <label class="weui-form-preview__label cDisease_warning">@item.SystolicPressure</label>
+                    }
+                    @if (item.DiastolicPressureIsNormal)
+                    {
+                        <label class="weui-form-preview__label">@item.DiastolicPressure</label>
+                    }
+                    else
+                    {
+                        <label class="weui-form-preview__label cDisease_warning">@item.DiastolicPressure</label>
+                    }
+                    @if (item.HeartRateIsNormal)
+                    {
+                        <label class="weui-form-preview__label">@item.HeartRate</label>
+                    }
+                    else
+                    {
+                        <label class="weui-form-preview__label cDisease_warning">@item.HeartRate</label>
+                    }
+                    @if (item.MeasureResultIsNormal)
+                    {
+                        <label class="weui-form-preview__label">正常</label>
+                    }
+                    else
+                    {
+                        <label class="weui-form-preview__label cDisease_warning">异常</label>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    category.Reverse();
+    systolicPressure.Reverse();
+    diastolicPressure.Reverse();
+}
+<script>
+    $(function () {
+        var categoryData = @Html.Raw(Json.Serialize(category));
+        var systolicPressureData = @Html.Raw(Json.Serialize(systolicPressure));
+        var diastolicPressureData = @Html.Raw(Json.Serialize(diastolicPressure));
+        var timeArr = new Array();
+        var systolicPressureArr = new Array();
+        var diastolicPressureArr = new Array();
+        for (var i = 0; i < categoryData.length; i++) {
+            timeArr.push({
+                label: categoryData[i],
+                stepSkipped: false
+            });
+            systolicPressureArr.push({
+                value: systolicPressureData[i]
+            });
+            diastolicPressureArr.push({
+                value: diastolicPressureData[i]
+            });
+        }
+        var chartData = new Array();
+        if (categoryData.length > 0) {
+            chartData.push({
+                "seriesname": "收缩压",
+                "color": "F97D10",
+                "data": systolicPressureArr
+            });
+            chartData.push({
+                "seriesname": "舒张压",
+                "color": "3994F9",
+                "data": diastolicPressureArr
+            });
+        }
+        FusionCharts.ready(function () {
+            var revenueChart = new FusionCharts({
+                "type": "msline",
+                "renderAt": "chartContainer",
+                "width": "100%",
+                "height": "300",
+                "dataFormat": "json",
+                "dataSource": {
+                    "chart": {
+                        "caption": "",
+                        "subcaption": "",
+                        "yaxisname": "mmhg",
+                        "yaxismaxvalue": "200",
+                        "yaxisminvalue": "0",
+                        "divlinealpha": "30",
+                        "showvalues": "1",
+                        "canvasbgalpha": "0",
+                        "bgalpha": "0",
+                        "plotborderalpha": "0",
+                        "showborder": "0",
+                        "showalternatehgridcolor": "0",
+                        "plotgradientcolor": "",
+                        "showplotborder": "0",
+                        "numdivlines": "5",
+                        "showyaxisvalues": "1",
+                        "palettecolors": "#97CBE7",
+                        "canvasborderthickness": "1",
+                        "canvasbordercolor": "#fff",
+                        "basefontcolor": "#074868",
+                        "divlinecolor": "#CCCCCC",
+                        "tooltipborderalpha": "0",
+                        "showLabels": "0"
+                    },
+                    "categories": [
+                        {
+                            "category": timeArr
+                        }
+                    ],
+                    "dataset": chartData
+                }
+            });
+            revenueChart.render();
+        })
+    })
+</script>

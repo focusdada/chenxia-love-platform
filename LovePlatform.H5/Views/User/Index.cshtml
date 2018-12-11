@@ -1,0 +1,153 @@
+﻿@using LovePlatform.Domain.Models
+@using LovePlatform.DTO.H5
+@model Tuple<User, DiagnoseDto, List<Treat>>
+<style>
+    .weui-media-box__desc{
+        display:inline;
+    }
+</style>
+<div class="weui-panel__bd">
+    <input type="hidden" value="@Model.Item1.Id" id="hdfUserId" />
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd" style="width:75px;margin-bottom:50px;">
+                    <div class="weui-cell__bd" >
+                        <div class="weui-uploader">
+                            <div class="weui-uploader__bd">
+                                <ul class="weui-uploader__files" id="uploaderFiles2">
+                                    @if(!string.IsNullOrEmpty(Model.Item1.Avatar))
+                                    { 
+                                        <li class="weui-uploader__file" style="background-image:url(@Model.Item1.Avatar)"></li>
+                                    }
+                                </ul>
+                                <div class="weui-uploader__input-box" style="margin:0;">
+                                    <input id="uploaderIdPhoto" class="weui-uploader__input" type="file" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="avatarBtn">
+                        上传头像
+                    </div>
+                </div>
+                <div class="weui-media-box__bd" id="diagnose">
+                    <a class="weui-cell weui-cell_access" href="@Url.Action("Create","Diagnose", new { UserId = Model.Item1.Id })">
+                        <div>
+                            <span class="weui-media-box__title">病体类型：</span><span class="weui-media-box__desc">@Model.Item2.DiseasesType</span>
+                        </div>
+                    </a>
+                    <a class="weui-cell weui-cell_access" href="@Url.Action("Create","Diagnose", new { UserId = Model.Item1.Id })">
+                        <div>
+                            <span class="weui-media-box__title">染色体：</span><span class="weui-media-box__desc">@Model.Item2.Chromosomal</span>
+                        </div>
+                    </a>
+                    <a class="weui-cell weui-cell_access" href="@Url.Action("Create","Diagnose", new { UserId = Model.Item1.Id })">
+                        <div>
+                            <span class="weui-media-box__title">免疫分型：</span><span class="weui-media-box__desc">@Model.Item2.Immunophenotyping</span>
+                        </div>
+                    </a>
+                    <a class="weui-cell weui-cell_access" href="@Url.Action("Create","Diagnose", new { UserId = Model.Item1.Id })">
+                        <div>
+                            <span class="weui-media-box__title">融合基因：</span><span class="weui-media-box__desc">@Model.Item2.FusionGene</span>
+                        </div>
+                    </a>
+                    <a class="weui-cell weui-cell_access" href="@Url.Action("Create","Diagnose", new { UserId = Model.Item1.Id })">
+                        <div>
+                            <span class="weui-media-box__title">二代基因测序：</span><span class="weui-media-box__desc">@Model.Item2.SecondGenerationGeneSequencing</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="weui-cells">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            治疗经过
+        </div>
+        <div class="weui-cell__ft">
+            <a href="@Url.Action("Create","Treat",new { UserId = Model.Item1.Id})" class="weui-btn weui-btn_primary">添加治疗记录</a>
+        </div>
+    </div>
+</div>
+<div id="gallery" class="weui-gallery" style="display: none">
+    <span id="galleryImg" class="weui-gallery__img" style=""></span>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+    </div>
+</div>
+@foreach (var item in Model.Item3 )
+{
+<div class="weui-panel">
+    <div class="weui-panel__bd">
+        <ul class="weui-media-box__info" style="color:black;font-weight:bold;">
+            <li class="weui-media-box__info__meta" style="margin-left:6px;">@item.TreatDate</li>
+            <li class="weui-media-box__info__meta" style="float:right;">@item.TreatPlace</li>
+        </ul>
+        <div class="weui-media-box weui-media-box_text" style="padding:5px;">
+            <a class="weui-cell weui-cell_access" href="@Url.Action("Edit","Treat",new { Id = item.Id})">
+                <div class="weui-cell__bd weui-media-box__desc">
+                    <p>@item.TreateDetail</p>
+                </div>
+                <span class="weui-cell__ft"></span>
+            </a>
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            //头像上传
+            var $uploaderIdPhoto = $("#uploaderIdPhoto"),
+                tmpl2 = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+                $uploaderFiles2 = $("#uploaderFiles2");
+
+            var avatarExists = $('#uploaderFiles2 li').length > 0 ? true : false;
+            if (avatarExists){
+                $('.weui-uploader__input-box').hide();
+                $('#avatarBtn').html('更新头像');
+            }
+
+            $uploaderIdPhoto.on("change", function (e) {
+                var url = window.URL || window.webkitURL || window.mozURL;
+                var fileUpload = $("#uploaderIdPhoto").get(0);
+                var files = fileUpload.files;
+                var data = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    data.append(files[i].name, files[i]);
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/User/UploadAvatar?UserId=@Model.Item1.Id",
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (response) {
+                        if (response != "") {
+                            $uploaderFiles2.html($(tmpl2.replace('#url#', response)));
+                            $(".weui-uploader__input-box").hide();
+                            //$("#Avatar").val(response);
+                        }
+                    },
+                    error: function () {
+                        alert("上传失败");
+                    }
+                });
+            });
+
+            //$uploaderFiles2.on("click", "li", function () {
+            //    $uploaderIdPhoto.click();
+            //});
+
+            $('#avatarBtn').click(function () {
+                $uploaderIdPhoto.click();
+            })
+        })
+    </script>
+}

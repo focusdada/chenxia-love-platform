@@ -1,0 +1,62 @@
+﻿@using LovePlatform.Domain.Models
+@model Diagnose
+@{
+    ViewData["Title"] = "诊疗记录";
+}
+<form asp-controller="Diagnose" asp-action="Create" method="post" id="form">
+    <input type="hidden" value="@Model.UserId" asp-for="UserId" />
+    <input type="hidden" value="@Model.Id" asp-for="Id" />
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cells__title">疾病类型</div>
+        <div class="weui-cell weui-cell_select weui-cell_select-after">
+            <div class="weui-cell__bd">
+                <select class="weui-select" asp-for="DiseasesType" asp-items="ViewBag.DiesasesTypeList">
+                </select>
+            </div>
+        </div>
+        <div class="weui-cells__title">染色体</div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" type="text" placeholder="请输入文字" value="@Model.Chromosomal" asp-for="Chromosomal" rows="6"></textarea>
+            </div>
+        </div>
+        <div class="weui-cells__title">免疫分型</div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" type="text" placeholder="请输入文字" value="@Model.Immunophenotyping" asp-for="Immunophenotyping" rows="6"></textarea>
+            </div>
+        </div>
+        <div class="weui-cells__title">融合基因</div>
+        <div class="weui-cell">            
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" type="text" placeholder="请输入文字" value="@Model.FusionGene" asp-for="FusionGene" rows="6"></textarea>
+            </div>
+        </div>
+        <div class="weui-cells__title">二代基因测序</div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" type="text" placeholder="请输入文字" value="@Model.SecondGenerationGeneSequencing" asp-for="SecondGenerationGeneSequencing" rows="6"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-btn-rea fix_btn">
+        <a class="weui-btn weui-btn_primary" id="btnSubmit">提交</a>
+    </div>
+</form>
+@section Scripts {
+    <script>
+            $('#btnSubmit').click(function () {
+                weui.form.validate('#form', function (error) {
+                    console.log(error);
+                    if (!error) {
+                        var loading = weui.loading('提交中...');
+                        $('#form').submit();
+                        setTimeout(function () {
+                            loading.hide();
+                            weui.toast('提交成功', 3000);
+                        }, 1500);
+                    }
+                });
+            })
+    </script>
+}

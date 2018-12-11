@@ -1,0 +1,61 @@
+﻿@using LovePlatform.Domain.Models
+@model Administrator
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-users font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">管理员列表</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-primary" href="javascript:Add();">新增</a>
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        @*<button type="button" class="btn btn-circle btn-primary" data-toggle="modal" onclick="Edit()">Add User</button>*@
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body" id="datagrid">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<div class="modal fade" id="promptmodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<div class="modal fade" id="errormodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<script>
+    $(function () {
+        $("#systemnav").addClass("start active open");
+        Search();
+    })
+
+    function Add() {
+        $("#editmodal").empty();
+
+        $("#editmodal").load("@Url.Action("Add", "Admin")");
+
+        $("#editmodal").modal("show");
+    }
+
+    function Search() {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("List", "Admin")",
+            data: $("#searchform").serialize(),
+            success: function (data) {
+                $("#datagrid").empty();
+                $("#datagrid").html(data);
+            },
+            error: function (e) {
+                console.error(e.message);
+            }
+        });
+    }
+</script>

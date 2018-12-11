@@ -1,0 +1,83 @@
+﻿// Configure bundling and minification for the project.
+// More info at https://go.microsoft.com/fwlink/?LinkId=808241
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/bootstrap.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/assets/global/plugins/simple-line-icons/simple-line-icons.min.css",
+      "wwwroot/assets/global/plugins/font-awesome/css/font-awesome.min.css",
+      "wwwroot/assets/global/plugins/bootstrap/css/bootstrap.min.css",
+      "wwwroot/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css",
+      "wwwroot/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/common.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/assets/global/css/components.min.css",
+      "wwwroot/assets/global/css/plugins.min.css",
+      "wwwroot/assets/layouts/layout2/css/layout.min.css",
+      "wwwroot/assets/layouts/layout2/css/themes/blue.min.css",
+      "wwwroot/assets/layouts/layout2/css/custom.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/common.js",
+    "inputFiles": [
+      "wwwroot/assets/global/plugins/jquery.min.js",
+      "wwwroot/assets/global/plugins/bootstrap/js/bootstrap.min.js",
+      "wwwroot/assets/global/plugins/js.cookie.min.js",
+      "wwwroot/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+      "wwwroot/assets/global/plugins/jquery.blockui.min.js",
+      "wwwroot/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  },
+  {
+    "outputFileName": "wwwroot/js/layout.js",
+    "inputFiles": [
+      "wwwroot/assets/global/plugins/moment.min.js",
+      "wwwroot/assets/global/plugins/jquery-ui/jquery-ui.min.js",
+      "wwwroot/assets/global/scripts/app.min.js",
+      "wwwroot/assets/layouts/layout2/scripts/layout.min.js",
+      "wwwroot/assets/layouts/layout2/scripts/demo.min.js",
+      "wwwroot/assets/layouts/global/scripts/quick-sidebar.min.js",
+      "wwwroot/assets/layouts/global/scripts/quick-nav.min.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  }
+]

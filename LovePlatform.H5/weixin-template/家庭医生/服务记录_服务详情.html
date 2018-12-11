@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>服务详情</title>
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/f.css"/>
+</head>
+<body ontouchstart>
+<div class="container">
+    <div class="weui-cells__title">基本信息</div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>任务类型</p>
+            </div>
+            <div class="weui-cell__ft">预约上门</div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>申请时间</p>
+            </div>
+            <div class="weui-cell__ft">2017-12-1</div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>上门日期</p>
+            </div>
+            <div class="weui-cell__ft">2017-12-2</div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>执行人</p>
+            </div>
+            <div class="weui-cell__ft">张三</div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>任务状态</p>
+            </div>
+            <div class="weui-cell__ft">处理完毕</div>
+        </div>
+    </div>
+    <div class="weui-cells__title">症状</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p class="weui-textarea">症状表现有多种形式，有的只有主观才能感觉到的，如疼痛、眩晕等；有些不仅能主观感觉到，而且客观检查也能发现，如发热、黄疸、呼吸困难等；也有主观无异常感觉，是通过客观检查才发现的，如黏膜出血、腹部包块等；还有些生命现象发生了质量变化（不足或超过），如肥胖、消瘦、多尿、少尿等，需通过客观评定才能确定、凡此种种，广义上均可视为症状（即广义的症状），也包括了一些体征。</p>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div class="weui-uploader">
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderFiles">
+                            <li class="weui-uploader__file" style="background-image:url(../images/jinchang.jpg)"></li>
+                            <li class="weui-uploader__file weui-uploader__file_status"
+                                style="background-image:url(../images/pic_160.png)">
+                                <div class="weui-uploader__file-content">
+                                    <i class="weui-icon-warn"></i>
+                                </div>
+                            </li>
+                            <li class="weui-uploader__file weui-uploader__file_status"
+                                style="background-image:url(../images/pic_160.png)">
+                                <div class="weui-uploader__file-content">50%</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="gallery" class="weui-gallery" style="opacity: 0; display: none;">
+    <span id="galleryImg" class="weui-gallery__img" style="background-image:url(../images/pic_160.png)"></span>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+    </div>
+</div>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/f.js"></script>
+</body>
+</html>

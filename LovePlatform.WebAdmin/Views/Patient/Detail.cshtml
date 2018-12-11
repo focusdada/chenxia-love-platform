@@ -1,0 +1,135 @@
+﻿@using LovePlatform.DTO.WebAdmin;
+@model PatientDetailViewDto
+
+<style>
+    .portlet {
+        margin-bottom: 0px;
+    }
+
+        .portlet > .portlet-title > .nav-tabs > li > a {
+            color: #9f9f9f;
+        }
+
+        .portlet > .portlet-title > .nav-tabs {
+            float: left;
+        }
+
+    .tab-content > .tab-pane,
+    .pill-content > .pill-pane {
+        display: block; /* undo display:none */
+        height: 0; /* height:0 is also invisible */
+        overflow-y: hidden; /* no-overflow */
+    }
+
+    .tab-content > .active,
+    .pill-content > .active {
+        height: auto; /* let the content decide it */
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="profile-sidebar">
+            <div class="portlet light profile-sidebar-portlet ">
+                <div class="profile-userpic">
+                    @if (string.IsNullOrEmpty(Model.PatientFace))
+                    {
+                        <img src="~/images/患者.png" class="img-responsive" alt="">
+                    }
+                    else
+                    {
+                        <img src="@Model.PatientFace" class="img-responsive" alt="">
+                    }
+                </div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">@Model.PatientName</div>
+                </div>
+                <div class="profile-userbuttons">
+                    <span class="badge badge-info">@Model.UserStatus</span>
+                    <span class="badge badge-warning">@Html.Raw(Model.Weight)Kg</span>
+                    @*<span class="badge badge-danger"> 120 / 80 </span>*@
+                </div>
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li>
+                            <a href="javascript:;">
+                                <div class="float-right">@Model.Brithdate</div>
+                                <div>出生日期</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <div class="float-right">@Model.CertType</div>
+                                <div>证件类型</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <div class="float-right">@Model.CertNo</div>
+                                <div>证件号码</div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <div class="float-right">@Model.TherapyStatus</div>
+                                <div>治疗状态</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-dark sbold uppercase">透析记录</span>
+                </div>
+                <div class="actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <label class="btn btn-circle grey-salsa btn-sm active">
+                            <input type="radio" name="options" class="toggle" value="@Url.Action("Index", "Patient", new { pageIndex = ViewBag.PageIndex })" onchange="$.index.pageJump(this)">返回
+                        </label>
+                    </div>
+                </div>
+                <form class="form-horizontal" role="form" asp-controller="Patient" asp-action="List" method="get" id="searchform">
+                    <input id="PageIndex" name="PageIndex" hidden />
+                    <input id="PatientId" name="PatientId" value="@Model.Id" hidden />
+                </form>
+            </div>
+            <div class="portlet-body" id="datagrid">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="portlet">
+            <div class="portlet-title tabbable-line">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#weight" data-toggle="tab" aria-expanded="true"> 体重 </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="portlet-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="weight">
+                        @*@Html.Partial("_WeightPartial", Model.Id)*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--初始化用-->
+<script src="~/assets/global/plugins/echarts/echarts.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        $("#patientnav").addClass("start active open");
+        Search();
+        $('.popovers').popover();
+    });
+
+
+</script>

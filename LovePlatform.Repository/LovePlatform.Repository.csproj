@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cuiliang.AliyunOssSdk" Version="0.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LovePlatform.Common\LovePlatform.Common.csproj" />
+    <ProjectReference Include="..\LovePlatform.Domain\LovePlatform.Domain.csproj" />
+    <ProjectReference Include="..\LovePlatform.DTO\LovePlatform.DTO.csproj" />
+  </ItemGroup>
+
+</Project>

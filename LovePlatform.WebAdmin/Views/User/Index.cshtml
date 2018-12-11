@@ -1,0 +1,84 @@
+﻿@model UserSearchInput
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-users font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">查询条件</span>
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-primary" onclick="Search()">查询</button>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form class="form-horizontal" role="form" asp-controller="User" asp-action="List" method="get" id="searchform">
+                    <div class="form-group">
+                        <label class="col-md-1 control-label" asp-for="Name">姓名</label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" asp-for="Name">
+                        </div>
+                    </div>
+                    <input asp-for="PageIndex" hidden />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-users font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">用户列表</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-primary" href="@Html.Raw(Url.Action("Export", "Excel"))">导出</a>
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        @*<button type="button" class="btn btn-circle btn-primary" data-toggle="modal" onclick="Edit()">Add User</button>*@
+                    </div>
+                </div>
+
+            </div>
+            <div class="portlet-body" id="datagrid">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<div class="modal fade" id="promptmodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<div class="modal fade" id="errormodal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+
+</div>
+<script>
+    $(function () {
+        $("#usernav").addClass("start active open");
+        Search();
+    })
+
+    function Search() {
+        $.ajax({
+            type: "GET",
+            url: "@Url.Action("List", "User")",
+            data: $("#searchform").serialize(),
+            success: function (data) {
+                $("#datagrid").empty();
+                $("#datagrid").html(data);
+            },
+            error: function (e) {
+                console.error(e.message);
+            }
+        });
+    }
+
+    @*function ClickSearch() {
+        window.location = "@Url.Action("Index", "User", new { pageIndex = 1 })" + "&hospitalId=" + $("#searchform #HospitalId").val();
+    }*@
+</script>

@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>身份识别</title>
+    <link rel="stylesheet" href="~/css/weui.min.css" />
+    <link rel="stylesheet" href="~/css/f.css" />
+</head>
+<body ontouchstart>
+    <div class="container">
+        <form asp-controller="Sign" asp-action="VerifyId" method="post">
+            <input name="openId" value="@ViewBag.OpenId" hidden />
+            <div class="weui-cells weui-cells__form id">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">身份证号</label></div>
+                    <div class="weui-cell__bd weui-cell__primary">
+                        <input name="idNo" id="idNo" class="weui-input" type="text" placeholder="请输入身份证号" />
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-rea fix_btn">
+                <a class="weui-btn weui-btn_primary" onclick="next()">下一步</a>
+            </div>
+        </form>
+    </div>
+    <script src="~/js/zepto.min.js"></script>
+    <script src="~/js/f.js"></script>
+    <script>
+        function next() {
+            if (f.reg_idNo($("#idNo").val())) {
+                $.ajax({
+                    url: "@Url.Action("VerifyId", "Sign")",
+                    type: "POST",
+                    data: $("form").serialize(),
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            if (typeof (data.Url) != "undefined" && data.Url != "") {
+                                window.location = data.Url;
+                            }
+                        } else {
+                            f.toptips(data.Message);
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

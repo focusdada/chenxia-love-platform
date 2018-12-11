@@ -1,0 +1,80 @@
+﻿@using LovePlatform.Domain.Models
+@model Treat
+@{
+    ViewData["Title"] = "新增治疗经过";
+    ViewData["Title"] = "新增治疗经过";
+}
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            <h4 class="modal-title">编辑患者信息</h4>
+        </div>
+        <div class="modal-body">
+            <form asp-controller="User" asp-action="AddTreat" class="form-horizontal" role="form" method="post" id="addTreatForm" enctype="multipart/form-data">
+                <input asp-for="UserId" value="@Model.UserId" hidden />
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="TreatDate">治疗时间</label>
+                        <div class="col-md-6">
+                            <input type="date" class="form-control" asp-for="TreatDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="TreatDoctor">主治医生</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" asp-for="TreatDoctor">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="TreatPlace">治疗地点</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" asp-for="TreatPlace">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="TreateDetail">治疗经过</label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" type="text" asp-for="TreateDetail" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">图片上传</label>
+                        <div class="col-md-6"><input id="input-b6" name="input-b6" type="file" asp-for="TreatePic1" multiple accept="image/*"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn green" id="btnSubmit" onclick="Submit()">保存</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#input-b6").fileinput({
+            showUpload: false,
+            showCancel: false,
+            dropZoneEnabled: false,
+            maxFileCount: 10,
+            mainClass: "input-group-sm"
+        });
+    })
+
+    function Submit() {
+        @*$.ajax({
+            url: "@Url.Action("AddTreat", "User")",
+            type: "POST",
+            data: $("#addTreatForm").serialize(),
+            success: function (data) {
+                $("#editmodal").empty();
+                $("#editmodal").modal("hide");
+                window.location.href = '@Html.Raw(Url.Action("Detail", "User", new { id = Model.UserId }))';
+            }
+        });*@
+        $('#btnSubmit').prop("disabled", 'true');
+        $('#addTreatForm').submit();
+    }
+</script>

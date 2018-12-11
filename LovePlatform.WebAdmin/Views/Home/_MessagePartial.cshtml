@@ -1,0 +1,35 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        @if (ViewBag.IsSuccessful)
+        {
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">提示</h4>
+            </div>
+        }
+        else
+        {
+            <div class="modal-header" style="background:#FF6C60;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">错误</h4>
+            </div>
+        }
+        <div class="modal-body">
+            <h4 class="modal-title" id="errorcontent" style="text-align:center;">@ViewBag.Message</h4>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="Confirm()">确定</button>
+        </div>
+    </div>
+</div>
+<script>
+    function Confirm() {
+        if ("@ViewBag.Url" != "") {
+            window.location = "@ViewBag.Url";
+        }
+    }
+</script>

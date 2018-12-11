@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-pointer font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">医院列表</span>
+                </div>
+                <div class="actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <button type="button" class="btn btn-circle btn-primary" data-toggle="modal" href="#basic">添加医院</button>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-scrollable table-scrollable-borderless">
+                    <table class="table table-hover table-light">
+                        <thead>
+                        <tr class="uppercase">
+                            <th>医院名称</th>
+                            <th>城市</th>
+                            <th>管理员</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>黑芝麻互联网医院</td>
+                            <td>苏州</td>
+                            <td>张三</td>
+                            <td>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" href="#basic">编辑</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" href="#del">删除</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="dataTables_paginate paging_bootstrap_full_number" style="text-align: center">
+                            <ul class="pagination" style="visibility: visible;">
+                                <li class="prev disabled"><a href="#" title=""><i
+                                        class="fa fa-angle-double-left"></i></a></li>
+                                <li class="prev disabled"><a href="#" title=""><i class="fa fa-angle-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li class="next"><a href="#" title=""><i class="fa fa-angle-right"></i></a></li>
+                                <li class="next"><a href="#" title=""><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">医院</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">省份</label>
+                            <div class="col-md-6">
+                                <select class="form-control">
+                                    <option>江苏</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">城市</label>
+                            <div class="col-md-6">
+                                <select class="form-control">
+                                    <option>苏州</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">医院名称</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="请输入" value="黑芝麻互联网医院">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green">保存更改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="del" tabindex="-1" role="del" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">删除</h4>
+            </div>
+            <div class="modal-body">
+               是否确定删除
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn red">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

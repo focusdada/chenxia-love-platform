@@ -1,0 +1,104 @@
+﻿@using LovePlatform.DTO.Common;
+@using LovePlatform.DTO.WebAdmin;
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            @if (Model.Id > 0)
+            {
+                <h4 class="modal-title">编辑患者</h4>
+            }
+            else
+            {
+                <h4 class="modal-title">新增患者</h4>
+            }
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" role="form" asp-controller="Course" asp-action="Edit" method="post" id="editform">
+                <input asp-for="Id" hidden />
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="PatientName">姓名</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="请输入姓名" asp-for="PatientName">
+                            <span asp-validation-for="PatientName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="Phone">手机号</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="请输入手机号" asp-for="Phone">
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="Brithdate">出生日期</label>
+                        <div class="col-md-6">
+                            <input type="date" class="form-control" placeholder="请选择出生日期" asp-for="Brithdate">
+                            <span asp-validation-for="Brithdate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" asp-for="UserStatus">用户状态</label>
+                        <div class="col-md-6">
+                            <select class="form-control" asp-for="UserStatus" asp-items="ViewBag.UserStatusList"></select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn green" onclick="Submit()">保存更改</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#editform #HospitalId").change(function () {
+            GetDoctor();
+        });
+    })
+
+    function Submit() {
+        $.ajax({
+            url: "@Url.Action("Edit", "Patient")",
+            type: "POST",
+            data: $("#editform").serialize(),
+            success: function (data) {
+                if (typeof (data.IsSuccess) == "undefined") {
+                    $("#editmodal").empty();
+                    $("#editmodal").html(data);
+                } else {
+                    $("#editmodal").modal("hide");
+                    if (data.IsSuccess) {
+                        $(".modal-backdrop.fade.in").remove();
+                        //提示框
+                        $("#promptmodal").empty();
+                        $("#promptmodal").load("@Url.Action("Message", "Home")" + "?isSuccess=" + data.IsSuccess + "&message=" + data.Message + "&url=" + "@Url.Action("Index", "Patient")");
+                        $("#promptmodal").modal("show");
+                    } else {
+                        //错误框
+                        $("#errormodal").empty();
+                        $("#errormodal").load("@Url.Action("Message", "Home")" + "?isSuccess=" + data.IsSuccess + "&message=" + data.Message);
+                        $("#errormodal").modal("show");
+                    }
+                }
+            }
+        });
+    }
+
+    function GetDoctor() {
+        $("#editform #DoctorId").empty();
+        $.getJSON(
+            "/Patient/GetDoctorList",
+            { isAddAll: true, hospitalId: $("#editform #HospitalId").val() },
+            function (data) {
+                $.each(data, function (i, item) {
+                    $("<option></option>").val(item["Id"]).text(item["Name"]).appendTo($("#editform #DoctorId"));
+
+                })
+            });
+    }
+</script>

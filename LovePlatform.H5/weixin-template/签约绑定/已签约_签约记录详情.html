@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title></title>
+    <link rel="stylesheet" href="../css/weui.min.css"/>
+    <link rel="stylesheet" href="../css/f.css"/>
+</head>
+<body ontouchstart>
+<div class="container">
+    <div class="container">
+        <div class="weui-cells__title title_dialog">
+            签约信息
+            <a id="clause">签约条款</a>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">签约机构</label>
+                </div>
+                <div class="weui-cell__ft">金阊街道社区卫生服务中心</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">签约团队</label>
+                </div>
+                <div class="weui-cell__ft">刘娟团队</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">签约日期</label>
+                </div>
+                <div class="weui-cell__ft">2016.12.1</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">截止日期</label>
+                </div>
+                <div class="weui-cell__ft">2017.12.1</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">服务包</label>
+                </div>
+                <div class="weui-cell__ft">签约基本服务包(2016)</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">家庭住址</label>
+                </div>
+                <div class="weui-cell__ft">三元二村 55幢101室</div>
+            </div>
+        </div>
+        <div class="weui-cells__title title_dialog">
+            本人信息
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">身份证号</label>
+                </div>
+                <div class="weui-cell__ft">320586199112100000</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">生日</label>
+                </div>
+                <div class="weui-cell__ft">1991-12-10</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">姓名</label>
+                </div>
+                <div class="weui-cell__ft">王琦</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">联系电话</label>
+                </div>
+                <div class="weui-cell__ft">15950000000</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">性别</label>
+                </div>
+                <div class="weui-cell__ft">男</div>
+            </div>
+        </div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">身份证号</label>
+                </div>
+                <div class="weui-cell__ft">320586199212100001</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">生日</label>
+                </div>
+                <div class="weui-cell__ft">1992-12-10</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">姓名</label>
+                </div>
+                <div class="weui-cell__ft">大炮</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">联系电话</label>
+                </div>
+                <div class="weui-cell__ft">15950000001</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">性别</label>
+                </div>
+                <div class="weui-cell__ft">男</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/zepto.min.js"></script>
+<script src="../js/f.js"></script>
+<script>
+    //签约条款
+    var clause = {
+        id: "clause",
+        title: "签约条款（盐城市亭湖区）",
+        p: "<article class='weui_article clause'>" +
+        "<h4>亭湖区家庭医生签约服务协议书</h4>" +
+        "<p>为进一步开展社区卫生服务工作，充分发挥家庭医生的健康守门人作用，本着平等、自愿的原则，经双方协商，达成如下协议：</p>" +
+        "<p>一、服务内容</p>" +
+        "<p>1、提供健康教育、健康咨询、妇幼保健及健康档案管理等基本公共卫生服务。</p>" +
+        "<p>2、65周岁以上老人每年一次健康体检，每3个月提供一次健康指导及随访。</p>" +
+        "<p>3、高血压、糖尿病居民提供血压血糖监测、用药指导、不良生活方式干预、综合评估等服务。</p>" +
+        "<p>4、对肿瘤、精神病、传染病等特殊病提供健康管理服务。</p>" +
+        "<p>5、因长期卧床行动不便居民，提供家庭病床式上门服务；病情复杂或病情控制不佳的居民协助专科医生给予个性化诊疗。</p>" +
+        "<p>6、因病情需要转上级二、三级医院、专科医院就诊住院的提供转诊服务。</p>" +
+        "<p>7、提供慢性病医保申请、药费报销等相关医保服务。对全年医药费个人负担较重的提出合理化诊疗方案，减轻家庭医疗费用支出。</p>" +
+        "<p>8、对签约家庭成员定期提供健康、疾病诊疗综合评价。</p>" +
+        "<p>二、接受家庭医生签约服务可享受如下优惠政策：</p>" +
+        "<p>1、到社区卫生服务中心就诊免收挂号诊费。</p>" +
+        "<p>2、协调医保部门为签约人员提供住院起付线减免等相关服务。</p>" +
+        "<p>3、为糖尿病居民免费提供测血糖4次。</p>" +
+        "<p>三、双方权利与义务</p>" +
+        "<p>签约人应将自己的健康状况如实告知乙方，尊重乙方服务过程，配合卫计部门和社区卫生服务机构等对签约团队服务工作的考核评估。签约团队医生应保护签约人的个人隐私，履行服务内容告知义务，主动提醒签约人接受服务，及时整理服务信息，保护服务的连续性、综合性、主动性。</p>" +
+        "<p>四、签约家庭对签约服务团队服务不满意，可向所辖街道社区卫生服务中心或亭湖区卫计委投诉，并在签约期满后提出调换服务团队。</p>" +
+        "<p>1、新城街道社区卫生服务中心投诉电话：0515-89811866</p>" +
+        "<p>2、区卫计委投诉电话：0515-68552098 0515-68552880</p>" +
+        "<p>五、本协议为期一年，从 年 月 日起至 年 月 日止。协议期满，签约家庭如无异议，自动续约；如需解约，应提前一个月告知对方。</p>" +
+        "<p>签约家庭代表：</p>" +
+        "<p>年 月 日</p>" +
+        "<p>签约团队负责人：</p>" +
+        "<p>年 月 日</p>" +
+        "</article>"
+    };
+    f.dialog(clause);
+</script>
+</body>
+</html>

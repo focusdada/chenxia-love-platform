@@ -1,0 +1,156 @@
+﻿@using LovePlatform.Domain.Models
+@model Treat
+@{
+    ViewData["Title"] = "诊疗记录";
+}
+<form asp-controller="Treat" asp-action="Edit" method="post" id="form" enctype="multipart/form-data">
+    <input type="hidden" value="@Model.Id" asp-for="Id" />
+    <input type="hidden" value="@Model.UserId" asp-for="UserId" />
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">治疗时间</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="date" asp-for="TreatDate" required />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">主治医生</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" required asp-for="TreatDoctor" placeholder="主治医生" />
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label">治疗地点</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" required asp-for="TreatPlace" placeholder="治疗地点" />
+            </div>
+        </div>
+        <div class="weui-cells__title">治疗经过</div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" required placeholder="治疗经过" asp-for="TreateDetail" rows="8" id="txtTreatDetail"></textarea>
+                <div class="weui-textarea-counter"><span id="treatDetailCount">0</span>/200</div>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__hd">
+                            <p class="weui-uploader__title">图片上传</p>
+                            <div class="weui-uploader__info"><span id="uploadCount">0</span>/4</div>
+                        </div>
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="uploaderFiles">
+                                @foreach (TreatImage item in ViewBag.TreatImageList)
+                                {
+                                    <li class="weui-uploader__file" style="background-image:url(@item.ImagePath)"></li>
+                                }
+                            </ul>
+                            <div class="weui-uploader__input-box">
+                                <input id="uploaderInput" class="weui-uploader__input" type="file" asp-for="TreatePic1" multiple capture="camera" accept="image/*" />
+                                @*<input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" capture="camera" multiple="" />*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="gallery" class="weui-gallery" style="display: none">
+            <span id="galleryImg" class="weui-gallery__img" style=""></span>
+            <div class="weui-gallery__opr">
+                <a href="javascript:" class="weui-gallery__del">
+                    <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                </a>
+            </div>
+        </div>
+        <div class="weui-btn-rea fix_btn">
+            <a class="weui-btn weui-btn_primary" id="btnSubmit">提交</a>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    <script>
+        $(function () {
+            let pics = $('#uploaderFiles li').length;
+            $('#uploadCount').html(pics);
+            if (pics == 4) {
+                $('.weui-uploader__input-box').hide();
+            }
+
+            //顶部进度条样式
+            $(".progress_bar_item_on").prevAll().css("background-color", "rgba(4, 190, 2, 0.8)");
+            $(".progress_bar_item_on_end").prevAll().css("background-color", "rgba(4, 190, 2, 0.8)");
+            var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
+                $gallery = $("#gallery"), $galleryImg = $("#galleryImg"),
+                $uploaderInput = $("#uploaderInput"),
+                $uploaderFiles = $("#uploaderFiles")
+                ;
+
+            //图片添加和上传，图片点击查看
+            $uploaderInput.on("change", function (e) {
+                var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+                for (var i = 0, len = files.length; i < len; ++i) {
+                    var file = files[i];
+
+                    if (url) {
+                        src = url.createObjectURL(file);
+                    } else {
+                        src = e.target.result;
+                    }
+
+                    $uploaderFiles.append($(tmpl.replace('#url#', src)));
+                }
+
+                let pics = $('#uploaderFiles li').length;
+                $('#uploadCount').html(pics);
+                if (pics == 4) {
+                    $('.weui-uploader__input-box').hide();
+                }
+            });
+            var index;
+            $uploaderFiles.on("click", "li", function () {
+                index = $(this).index();
+                $galleryImg.attr("style", this.getAttribute("style"));
+                $gallery.fadeIn(100);
+            });
+            $gallery.on("click", function () {
+                $gallery.fadeOut(100);
+            });
+
+            $(".weui-gallery__del").click(function () {
+                $uploaderFiles.find("li").eq(index).remove();
+                let pics = $('#uploaderFiles li').length;
+                $('#uploadCount').html(pics);
+                if (pics < 4) {
+                    $('.weui-uploader__input-box').show();
+                }
+            });
+
+            //Treat detail count
+            $('#treatDetailCount').html($('#txtTreatDetail').val().length);
+            $('#txtTreatDetail').keyup(function (e) {
+                let len = $(this).val().length
+                if (len > 200) {
+                    $(this).val($(this).val().substr(0, 199));
+                    return false;
+                }
+                $('#treatDetailCount').html(len);
+            })
+        });
+        $('#btnSubmit').click(function () {
+            weui.form.validate('#form', function (error) {
+                console.log(error);
+                if (!error) {
+                    $('#btnSubmit').unbind();
+                    var loading = weui.loading('提交中...');
+                    $('#form').submit();
+                    setTimeout(function () {
+                        loading.hide();
+                        weui.toast('提交成功', 9000);
+                    }, 1500);
+                }
+            });
+        })
+    </script>
+}

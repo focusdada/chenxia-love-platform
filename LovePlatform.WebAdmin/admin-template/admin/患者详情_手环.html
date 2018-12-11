@@ -1,0 +1,148 @@
+<div class="col-md-12">
+    <div class="portlet light portlet-fit ">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject font-dark bold uppercase">步数</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div id="step" style="height:500px;"></div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="portlet light portlet-fit ">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject font-dark bold uppercase">睡眠</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div id="sleep" style="height:500px;"></div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="portlet light portlet-fit ">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject font-dark bold uppercase">距离</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div id="distance" style="height:500px;"></div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="portlet light portlet-fit ">
+        <div class="portlet-title">
+            <div class="caption">
+                <span class="caption-subject font-dark bold uppercase">能量</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div id="energy" style="height:500px;"></div>
+        </div>
+    </div>
+</div>
+<!--初始化用-->
+<script src="../assets/global/plugins/echarts/echarts.js" type="text/javascript"></script>
+<script>
+    $(function () {
+        require.config({paths: {echarts: "../assets/global/plugins/echarts/"}}), require(["echarts", "echarts/chart/bar", "echarts/chart/line"], function (e) {
+            var step = e.init(document.getElementById("step"));
+            step.setOption({
+                tooltip: {trigger: "axis"},
+                toolbox: {
+                    show: !0,
+                    feature: {
+                        restore: {show: !0},
+                        saveAsImage: {show: !0}
+                    }
+                },
+                calculable: !0,
+                xAxis: [{
+                    type: "category",
+                    data: ["3-1 15:39", "15:39 ", "15:39", "15:39", "3-2 15:39 ", "15:39 ", "15:39", "15:39", "15:39", "15:39", "15:39", "15:39"]
+                }],
+                yAxis: [{type: "value", splitArea: {show: !0}, axisLabel: {formatter: "{value} m"}}],
+                series: [
+                    {
+                        name: "步数",
+                        type: "bar",
+                        data: [71.2, 72.0, 70.9, 71.2, 71.3, 70.8, 69.9, 68.9, 72.0, 71.6, 72.2, 74]
+                    }]
+            });
+            var sleep = e.init(document.getElementById("sleep"));
+            sleep.setOption({
+                tooltip: {trigger: "axis"},
+                toolbox: {
+                    show: !0,
+                    feature: {
+                        restore: {show: !0},
+                        saveAsImage: {show: !0}
+                    }
+                },
+                calculable: !0,
+                xAxis: [{
+                    type: "category",
+                    data: ["3-1 15:39", "15:39 ", "15:39", "15:39", "3-2 15:39 ", "15:39 ", "15:39", "15:39", "15:39", "15:39", "15:39", "15:39"]
+                }],
+                yAxis: [{type: "value", splitArea: {show: !0}, axisLabel: {formatter: "{value} min"}}],
+                series: [
+                    {
+                        name: "睡眠",
+                        type: "bar",
+                        data: [71.2, 72.0, 70.9, 71.2, 71.3, 70.8, 69.9, 68.9, 72.0, 71.6, 72.2, 74]
+                    }]
+            });
+            var distance = e.init(document.getElementById("distance"));
+            distance.setOption({
+                tooltip: {trigger: "axis"},
+                toolbox: {
+                    show: !0,
+                    feature: {
+                        restore: {show: !0},
+                        saveAsImage: {show: !0}
+                    }
+                },
+                calculable: !0,
+                xAxis: [{
+                    type: "category",
+                    data: ["3-1 15:39", "15:39 ", "15:39", "15:39", "3-2 15:39 ", "15:39 ", "15:39", "15:39", "15:39", "15:39", "15:39", "15:39"]
+                }],
+                yAxis: [{type: "value", splitArea: {show: !0}, axisLabel: {formatter: "{value} m"}}],
+                series: [
+                    {
+                        name: "距离",
+                        type: "bar",
+                        data: [71.2, 72.0, 70.9, 71.2, 71.3, 70.8, 69.9, 68.9, 72.0, 71.6, 72.2, 74]
+                    }]
+            });
+            var energy = e.init(document.getElementById("energy"));
+            energy.setOption({
+                tooltip: {trigger: "axis"},
+                toolbox: {
+                    show: !0,
+                    feature: {
+                        restore: {show: !0},
+                        saveAsImage: {show: !0}
+                    }
+                },
+                calculable: !0,
+                xAxis: [{
+                    type: "category",
+                    data: ["3-1 15:39", "15:39 ", "15:39", "15:39", "3-2 15:39 ", "15:39 ", "15:39", "15:39", "15:39", "15:39", "15:39", "15:39"]
+                }],
+                yAxis: [{type: "value", splitArea: {show: !0}, axisLabel: {formatter: "{value} cal"}}],
+                series: [
+                    {
+                        name: "能量",
+                        type: "bar",
+                        data: [71.2, 72.0, 70.9, 71.2, 71.3, 70.8, 69.9, 68.9, 72.0, 71.6, 72.2, 74]
+                    }]
+            });
+        })
+    });
+</script>

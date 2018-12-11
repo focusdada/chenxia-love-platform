@@ -1,0 +1,53 @@
+<div class="col-md-12">
+    <div class="portlet">
+        <div class="portlet-title tabbable-line" style="padding: 0 15px;">
+            <div class="caption">
+                <div class="btn-group btn-group-devided" data-toggle="buttons">
+                    <label class="btn btn-circle grey-salsa btn-sm active">
+                        <input type="radio" name="options" class="toggle" value="患者"
+                               onchange="$.index.pageJump(this)">返回
+                    </label>
+                </div>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#base" data-toggle="tab" aria-expanded="true"> 基本 </a>
+                </li>
+                <li class="">
+                    <a href="#water" data-toggle="tab" aria-expanded="true"> 饮水量 </a>
+                </li>
+                <li class="">
+                    <a href="#bloodSugar" data-toggle="tab" aria-expanded="false"> 血糖 </a>
+                </li>
+                <li class="">
+                    <a href="#bracelet" data-toggle="tab" aria-expanded="false"> 手环 </a>
+                </li>
+            </ul>
+        </div>
+        <div class="portlet-body">
+            <div class="tab-content">
+                <div class="tab-pane active" id="base">
+
+                </div>
+                <div class="tab-pane" id="water">
+
+                </div>
+                <div class="tab-pane" id="bloodSugar">
+
+                </div>
+                <div class="tab-pane" id="bracelet">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#base").load("患者详情_基本.html");
+        $("#water").load("患者详情_饮水量.html");
+        $("#bloodSugar").load("患者详情_血糖.html");
+        $("#bracelet").load("患者详情_手环.html");
+        $(".page-content").addClass("minheight");
+    });
+</script>

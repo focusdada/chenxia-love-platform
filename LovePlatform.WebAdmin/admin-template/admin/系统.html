@@ -1,0 +1,123 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">系统用户列表</span>
+                </div>
+                <div class="actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <button type="button" class="btn btn-circle btn-primary" data-toggle="modal" href="#basic">
+                            添加系统用户
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-scrollable table-scrollable-borderless">
+                    <table class="table table-hover table-light">
+                        <thead>
+                        <tr class="uppercase">
+                            <th>登录名</th>
+                            <th>医院</th>
+                            <th>是否超管</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>admin</td>
+                            <td>黑芝麻医院互联网医院</td>
+                            <td>是</td>
+                            <td>
+                                <button type="button" class="btn btn-default btn-sm">编辑</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" href="#del">删除
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="dataTables_paginate paging_bootstrap_full_number" style="text-align: center">
+                            <ul class="pagination" style="visibility: visible;">
+                                <li class="prev disabled"><a href="#" title=""><i
+                                        class="fa fa-angle-double-left"></i></a></li>
+                                <li class="prev disabled"><a href="#" title=""><i class="fa fa-angle-left"></i></a></li>
+                                <li class="active"><a href="#"><font><font>1</font></font></a></li>
+                                <li><a href="#"><font><font>2</font></font></a></li>
+                                <li><a href="#"><font><font>3</font></font></a></li>
+                                <li><a href="#"><font><font>4</font></font></a></li>
+                                <li><a href="#"><font><font>5</font></font></a></li>
+                                <li class="next"><a href="#" title=""><i class="fa fa-angle-right"></i></a></li>
+                                <li class="next"><a href="#" title=""><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">系统用户</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">登录名</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="请输入" value="admin">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">医院</label>
+                            <div class="col-md-6">
+                                <select class="form-control">
+                                    <option>黑芝麻互联网医院</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">是否超管</label>
+                            <div class="col-md-6">
+                                <select class="form-control">
+                                    <option>是</option>
+                                    <option>否</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green">保存更改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="del" tabindex="-1" role="del" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">删除</h4>
+            </div>
+            <div class="modal-body">
+                是否确定删除
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn red">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

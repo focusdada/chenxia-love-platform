@@ -1,0 +1,79 @@
+﻿@using LovePlatform.DTO.Common;
+@using LovePlatform.DTO.WebAdmin;
+@model Page<PatientViewDto>
+
+<div class="table-scrollable table-scrollable-borderless">
+    <table class="table table-hover table-light">
+        <thead>
+            <tr class="uppercase">
+                <th>Name</th>
+                <th>Brithdate</th>
+                <th>UserStatus</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Items != null && Model.Items.Count > 0)
+            {
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.PatientName</td>
+                        <td>@item.Brithdate</td>
+                        <td>
+                            <span class="label label-sm label-@item.UserStatusCss">@item.UserStatus</span>
+                        </td>
+                        <td>
+                            @*<button type="button" class="btn btn-default btn-sm" onclick="$.index.pageJump(this)" value="@Html.Raw(Url.Action("Detail", "Patient", new { id = item.Id, pageIndex = Model.CurrentPage }))">详情</button>*@
+                            <a class="btn btn-default btn-sm" href="@Html.Raw(Url.Action("Detail", "Patient", new { id = item.Id }))">详情</a>
+                            @*<button type="button" class="btn btn-default btn-sm" data-toggle="modal" onclick="Edit(@item.Id)">Edit</button>*@
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<hr style="margin-top: 0">
+<div id="pagetoolbar"></div>
+<script>
+    $(function () {
+        $("#pagetoolbar").bs_pagination({
+            currentPage: @Model.CurrentPage,
+            rowsPerPage: 10,
+            maxRowsPerPage: 100,
+            totalPages: @Model.TotalPages,
+            totalRows: @Model.TotalRecords,
+
+            showGoToPage: true,
+            showRowsPerPage: false,
+            showRowsInfo: false,
+            showRowsDefaultInfo: true,
+
+            onChangePage: function (data, param) { // 点击后返回page_num和rows_per_page
+                $("#PageIndex").val(param.currentPage);
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Action("List", "Patient")",
+                    data: $("#searchform").serialize(),
+                    success: function (data) {
+                        $("#datagrid").empty();
+                        $("#datagrid").html(data);
+                    }
+                });
+            },
+            onLoad: function () { // 在插件加载时返回page_num和rows_per_page
+            }
+        });
+    })
+
+    function Edit(id) {
+        $("#editmodal").empty();
+        if (typeof (id) == "undefined") {
+            $("#editmodal").load("@Url.Action("Edit", "Patient")" + "?id=0");
+        } else {
+            $("#editmodal").load("@Url.Action("Edit", "Patient")" + "?id=" + id);
+        }
+        $("#editmodal").modal("show");
+    }
+</script>

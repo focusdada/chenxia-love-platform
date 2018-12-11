@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-book-open font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">课程内容列表</span>
+                </div>
+                <div class="actions">
+                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                        <button type="button" class="btn btn-circle btn-primary" data-toggle="modal" href="#basic">
+                            添加课程内容
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-scrollable table-scrollable-borderless">
+                    <table class="table table-hover table-light">
+                        <thead>
+                        <tr class="uppercase">
+                            <th>课程类别名称</th>
+                            <th>标题</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>CKD1期</td>
+                            <td>1-1激素类药物的护理指导</td>
+                            <td>
+                                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" href="#basic">
+                                    编辑
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" href="#del">删除
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="dataTables_paginate paging_bootstrap_full_number" style="text-align: center">
+                            <ul class="pagination" style="visibility: visible;">
+                                <li class="prev disabled"><a href="#" title=""><i
+                                        class="fa fa-angle-double-left"></i></a></li>
+                                <li class="prev disabled"><a href="#" title=""><i class="fa fa-angle-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li class="next"><a href="#" title=""><i class="fa fa-angle-right"></i></a></li>
+                                <li class="next"><a href="#" title=""><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="basic" tabindex="-1" role="basic" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">课程内容</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">类别</label>
+                            <div class="col-md-6">
+                                <select class="form-control">
+                                    <option>CKD1期</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">标题</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="请输入" value="1-1激素类药物的护理指导">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">内容</label>
+                            <div class="col-md-6">
+                                <textarea class="form-control" rows="10" placeholder="请输入">常见的激素类药物有糖皮质激素，糖皮质激素的作用广泛而复杂，且随浓度不同而异。生理情况下所分泌的糖皮质激素主要影响物质代谢过程，超生理浓度的糖皮质激素还有抗炎、抗免疫等药理作用。在血液与造血系统方面，糖皮质激素能刺激骨髓造血功能，使红细胞和血红蛋白含量增加。</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green">保存更改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="del" tabindex="-1" role="del" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">删除</h4>
+            </div>
+            <div class="modal-body">
+                是否确定删除
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn red">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
